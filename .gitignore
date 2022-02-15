@@ -1,4 +1,9 @@
-.idea/
+#Production stuff
 out/
+.idea/
+
+#IDE specifc file
 /animal_simulator.iml
 
+#Compiled class files
+*.class
