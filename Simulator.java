@@ -59,7 +59,7 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
+        view.setColor(Jackalope.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
         
         // Setup a valid starting point.
@@ -143,8 +143,8 @@ public class Simulator
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    animals.add(rabbit);
+                    Jackalope Jackalope = new Jackalope(true, field, location);
+                    animals.add(Jackalope);
                 }
                 // else leave the location empty.
             }

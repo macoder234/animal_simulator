@@ -116,8 +116,8 @@ public class Fox extends Animal
         List<Location> adjacent = field.adjacentLocations(getLocation());
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
-            if (animal instanceof Rabbit rabbit && rabbit.isAlive()) {
-                    rabbit.setDead();
+            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
+                    jackalope.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
             }
