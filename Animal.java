@@ -21,7 +21,7 @@ public abstract class Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Animal(Field field, Location location)
+    protected Animal(Field field, Location location)
     {
         alive = true;
         this.field = field;
@@ -33,7 +33,7 @@ public abstract class Animal
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
-    abstract public void act(List<Animal> newAnimals);
+    public abstract void act(List<Animal> newAnimals);
 
     /**
      * Check whether the animal is alive or not.

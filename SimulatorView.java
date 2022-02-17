@@ -106,7 +106,6 @@ public class SimulatorView extends JFrame
         if(!isVisible()) {
             setVisible(true);
         }
-            
         stepLabel.setText(STEP_PREFIX + step);
         stats.reset();
         

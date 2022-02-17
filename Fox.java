@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Iterator;
 import java.util.Random;
 
 /**
@@ -58,7 +57,7 @@ public class Fox extends Animal
      * This is what the fox does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
-     * @param field The field currently occupied.
+//     * @param field The field currently occupied.
      * @param newFoxes A list to return newly born foxes.
      */
     public void act(List<Animal> newFoxes)
@@ -115,17 +114,12 @@ public class Fox extends Animal
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
-        while(it.hasNext()) {
-            Location where = it.next();
+        for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
-            if(animal instanceof Rabbit) {
-                Rabbit rabbit = (Rabbit) animal;
-                if(rabbit.isAlive()) { 
+            if (animal instanceof Rabbit rabbit && rabbit.isAlive()) {
                     rabbit.setDead();
                     foodLevel = RABBIT_FOOD_VALUE;
                     return where;
-                }
             }
         }
         return null;
@@ -143,7 +137,7 @@ public class Fox extends Animal
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
+        for(int b = 0; b < births && !free.isEmpty(); b++) {
             Location loc = free.remove(0);
             Fox young = new Fox(false, field, loc);
             newFoxes.add(young);

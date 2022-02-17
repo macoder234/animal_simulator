@@ -82,7 +82,7 @@ public class Simulator
      */
     public void simulate(int numSteps)
     {
-        for(int step = 1; step <= numSteps && view.isViable(field); step++) {
+        for(int tally = 1; tally <= numSteps && view.isViable(field); tally++) {
             simulateOneStep();
             delay(60);   // uncomment this to run more slowly
         }
@@ -169,5 +169,4 @@ public class Simulator
         Simulator sim = new Simulator();
         sim.runLongSimulation();
     }
-//    This is test2.
 }
