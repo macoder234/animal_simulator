@@ -65,7 +65,9 @@ public class Simulator
         view.setColor(Jackalope.class, Color.GRAY);
         view.setColor(Werewolf.class, new Color(102,0,153));
         view.setColor(Griffon.class, new Color(255,204,0));
-        
+        view.setColor(Unicorn.class, new Color(28, 248, 4));
+
+
         // Setup a valid starting point.
         reset();
     }
