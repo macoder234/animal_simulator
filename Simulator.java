@@ -62,10 +62,13 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Jackalope.class, Color.GRAY);
-        view.setColor(Werewolf.class, new Color(102,0,153));
+        view.setColor(Jackalope.class, new Color(150, 75, 0, 255));
+        view.setColor(Werewolf.class, new Color(94, 94, 94, 255));
         view.setColor(Griffon.class, new Color(255,204,0));
-        view.setColor(Unicorn.class, new Color(28, 248, 4));
+        view.setColor(Unicorn.class, new Color(167, 4, 248));
+        view.setColor(Pegasus.class, new Color(0,0,0));
+        view.setColor(Cyclops.class, new Color(253, 0, 0));
+
 
 
         // Setup a valid starting point.
@@ -152,7 +155,7 @@ public class Simulator
                     Jackalope Jackalope = new Jackalope(true, field, location);
                     animals.add(Jackalope);
                 }
-                if(rand.nextDouble() <= GRIFFON_CREATION_PROBABILITY) {
+                else if(rand.nextDouble() <= GRIFFON_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Griffon griffon = new Griffon(true, field, location);
                     animals.add(griffon);

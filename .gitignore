@@ -4,6 +4,7 @@ out/
 
 #IDE specifc file
 /animal_simulator.iml
+/AnimalSimulator.iml
 
 #Compiled class files
 *.class
