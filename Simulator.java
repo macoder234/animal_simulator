@@ -19,12 +19,19 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
+    private static final double WEREWOLF_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    private static final double JACKALOPE_CREATION_PROBABILITY = 0.08;
     // The probability that a rabbit will be created in any given grid position.
     private static final double GRIFFON_CREATION_PROBABILITY = 0.01;
     // The probability that a griffon will be created in any given grid position.
+    private static final double PEGASUS_CREATION_PROBABILITY = 0.04;
+    // The probability that a pegasus will be created in any given grid position.
+    private static final double UNICORN_CREATION_PROBABILITY = 0.04;
+    // The probability that a unicorn will be created in any given grid position.
+    private static final double CYCLOPS_CREATION_PROBABILITY = 0.04;
+    // The probability that a cyclops will be created in any given grid position.
+
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -145,12 +152,12 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if(rand.nextDouble() <= WEREWOLF_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Werewolf werewolf = new Werewolf(true, field, location);
                     animals.add(werewolf);
                 }
-                else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+                else if(rand.nextDouble() <= JACKALOPE_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Jackalope Jackalope = new Jackalope(true, field, location);
                     animals.add(Jackalope);
@@ -159,7 +166,23 @@ public class Simulator
                     Location location = new Location(row, col);
                     Griffon griffon = new Griffon(true, field, location);
                     animals.add(griffon);
-                }                // else leave the location empty.
+                }
+                else if(rand.nextDouble() <= PEGASUS_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Pegasus pegasus = new Pegasus(true, field, location);
+                    animals.add(pegasus);
+                }
+                else if(rand.nextDouble() <= CYCLOPS_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Cyclops cyclops = new Cyclops(true, field, location);
+                    animals.add(cyclops);
+                }
+                else if(rand.nextDouble() <= UNICORN_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Unicorn unicorn = new Unicorn(true, field, location);
+                    animals.add(unicorn);
+                }
+                // else leave the location empty.
             }
         }
     }
