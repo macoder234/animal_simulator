@@ -3,12 +3,12 @@ import java.util.Random;
 
 /**
  * A simple model of a fox.
- * Foxes age, move, eat rabbits, and die.
+ * Werewolves age, move, eat rabbits, and die.
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Fox extends Animal
+public class Werewolf extends Animal
 {
     // Characteristics shared by all foxes (class variables).
     
@@ -30,7 +30,7 @@ public class Fox extends Animal
     // The fox's age.
     private int age;
     // The fox's food level, which is increased by eating rabbits.
-    private int foodLevel;
+    private int health;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero
@@ -40,16 +40,16 @@ public class Fox extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Fox(boolean randomAge, Field field, Location location)
+    public Werewolf(boolean randomAge, Field field, Location location)
     {
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            foodLevel = rand.nextInt(RABBIT_FOOD_VALUE);
+            health = rand.nextInt(RABBIT_FOOD_VALUE);
         }
         else {
             age = 0;
-            foodLevel = RABBIT_FOOD_VALUE;
+            health = RABBIT_FOOD_VALUE;
         }
     }
     
@@ -58,14 +58,14 @@ public class Fox extends Animal
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
 //     * @param field The field currently occupied.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newWerewolves A list to return newly born foxes.
      */
-    public void act(List<Animal> newFoxes)
+    public void act(List<Animal> newWerewolves)
     {
         incrementAge();
         incrementHunger();
         if(isAlive()) {
-            giveBirth(newFoxes);            
+            giveBirth(newWerewolves);            
             // Move towards a source of food if found.
             Location newLocation = findFood();
             if(newLocation == null) { 
@@ -99,8 +99,8 @@ public class Fox extends Animal
      */
     private void incrementHunger()
     {
-        foodLevel--;
-        if(foodLevel <= 0) {
+        health--;
+        if(health <= 0) {
             setDead();
         }
     }
@@ -118,7 +118,7 @@ public class Fox extends Animal
             Object animal = field.getObjectAt(where);
             if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                     jackalope.setDead();
-                    foodLevel = RABBIT_FOOD_VALUE;
+                    health = RABBIT_FOOD_VALUE;
                     return where;
             }
         }
@@ -128,9 +128,9 @@ public class Fox extends Animal
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newFoxes A list to return newly born foxes.
+     * @param newWerewolves A list to return newly born foxes.
      */
-    private void giveBirth(List<Animal> newFoxes)
+    private void giveBirth(List<Animal> newWerewolves)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -139,8 +139,8 @@ public class Fox extends Animal
         int births = breed();
         for(int b = 0; b < births && !free.isEmpty(); b++) {
             Location loc = free.remove(0);
-            Fox young = new Fox(false, field, loc);
-            newFoxes.add(young);
+            Werewolf young = new Werewolf(false, field, loc);
+            newWerewolves.add(young);
         }
     }
         

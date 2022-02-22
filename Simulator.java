@@ -21,7 +21,10 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    // The probability that a rabbit will be created in any given grid position.
+    private static final double GRIFFON_CREATION_PROBABILITY = 0.01;
+    // The probability that a griffon will be created in any given grid position.
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -59,8 +62,9 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Jackalope.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
+        view.setColor(Jackalope.class, Color.GRAY);
+        view.setColor(Werewolf.class, new Color(102,0,153));
+        view.setColor(Griffon.class, new Color(255,204,0));
         
         // Setup a valid starting point.
         reset();
@@ -84,7 +88,7 @@ public class Simulator
     {
         for(int tally = 1; tally <= numSteps && view.isViable(field); tally++) {
             simulateOneStep();
-            delay(60);   // uncomment this to run more slowly
+            delay(100);   // uncomment this to run more slowly
         }
     }
     
@@ -138,15 +142,19 @@ public class Simulator
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    animals.add(fox);
+                    Werewolf werewolf = new Werewolf(true, field, location);
+                    animals.add(werewolf);
                 }
                 else if(rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Jackalope Jackalope = new Jackalope(true, field, location);
                     animals.add(Jackalope);
                 }
-                // else leave the location empty.
+                if(rand.nextDouble() <= GRIFFON_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Griffon griffon = new Griffon(true, field, location);
+                    animals.add(griffon);
+                }                // else leave the location empty.
             }
         }
     }
