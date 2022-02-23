@@ -110,6 +110,10 @@ public class Griffon extends Animal
     /**
      * Look for prey adjacent to the current location.
      * Only the first live rabbit is eaten.
+     *
+     * Note: We would like to iterate through the prey of
+     * the predators.
+     *
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood()
