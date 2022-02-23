@@ -3,14 +3,16 @@ import java.util.Random;
 
 public class Cyclops extends Animal
 {
+
+    private AnimalData data = new AnimalData();
     // Characteristics shared by all foxes (class variables).
 
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private static final int BREEDING_AGE = data.getBreedingAge("Cyclops");
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
+    private static final int MAX_AGE = data.getMaxAge("Cyclops");
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private static final double BREEDING_PROBABILITY = data.getBreedingProbability("Cyclops");;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single rabbit. In effect, this is the
@@ -159,3 +161,6 @@ public class Cyclops extends Animal
         return age >= BREEDING_AGE;
     }
 }
+
+
+
