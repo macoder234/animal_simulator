@@ -13,16 +13,19 @@ public class Griffon extends Animal
     private static final double BREEDING_PROBABILITY = 0.08;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 2;
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    // The food value of a single jackalope. In effect, this is the
+    // number of steps a werewolf can go before it has to eat again.
+    private static final int JACKALOPE_FOOD_VALUE = 9;
+    // The food value of a single pegasus. In effect, this is the
+    // number of steps a werewolf can go before it has to eat again.
+    private static final int PEGASUS_FOOD_VALUE = 10;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
     // Individual characteristics (instance fields).
     // The fox's age.
     private int age;
-    // The fox's food level, which is increased by eating rabbits.
+    // The fox's health level, which is increased by eating prey.
     private int health;
 
     /**
@@ -36,13 +39,14 @@ public class Griffon extends Animal
     public Griffon(boolean randomAge, Field field, Location location)
     {
         super(field, location);
+        int average = (JACKALOPE_FOOD_VALUE + PEGASUS_FOOD_VALUE)/2;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(RABBIT_FOOD_VALUE);
+            health = rand.nextInt(average);
         }
         else {
             age = 0;
-            health = RABBIT_FOOD_VALUE;
+            health = average;
         }
     }
 
@@ -99,7 +103,7 @@ public class Griffon extends Animal
     }
 
     /**
-     * Look for rabbits adjacent to the current location.
+     * Look for prey adjacent to the current location.
      * Only the first live rabbit is eaten.
      * @return Where food was found, or null if it wasn't.
      */
@@ -111,8 +115,13 @@ public class Griffon extends Animal
             Object animal = field.getObjectAt(where);
             if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                 jackalope.setDead();
-                health = RABBIT_FOOD_VALUE;
+                health += JACKALOPE_FOOD_VALUE;
                 return where;
+            }
+            else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
+            pegasus.setDead();
+            health += PEGASUS_FOOD_VALUE;
+            return where;
             }
         }
         return null;
