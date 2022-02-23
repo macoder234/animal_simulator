@@ -10,16 +10,19 @@ import java.util.Random;
  */
 public class Werewolf extends Animal
 {
-    // Characteristics shared by all foxes (class variables).
-    
+    // Characteristics shared by all werewolves (class variables).
+
+    private static String ANIMAL_NAME = "Werewolf";
+    //
+    private AnimalData data = new AnimalData();
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+    // The likelihood of a werewolf breeding.
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
@@ -33,10 +36,10 @@ public class Werewolf extends Animal
     private int health;
 
     /**
-     * Create a fox. A fox can be created as a new born (age zero
+     * Create a werewolf. A werewolf can be created as a new born (age zero
      * and not hungry) or with a random age and food level.
      * 
-     * @param randomAge If true, the fox will have random age and hunger level.
+     * @param randomAge If true, the werewolf will have random age and hunger level.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -54,11 +57,11 @@ public class Werewolf extends Animal
     }
     
     /**
-     * This is what the fox does most of the time: it hunts for
+     * This is what the werewolf does most of the time: it hunts for
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
 //     * @param field The field currently occupied.
-     * @param newWerewolves A list to return newly born foxes.
+     * @param newWerewolves A list to return newly born werewolves.
      */
     public void act(List<Animal> newWerewolves)
     {
@@ -84,7 +87,7 @@ public class Werewolf extends Animal
     }
 
     /**
-     * Increase the age. This could result in the fox's death.
+     * Increase the age. This could result in the werewolf's death.
      */
     private void incrementAge()
     {
@@ -95,7 +98,7 @@ public class Werewolf extends Animal
     }
     
     /**
-     * Make this fox more hungry. This could result in the fox's death.
+     * Make this werewolf more hungry. This could result in the werewolf's death.
      */
     private void incrementHunger()
     {
@@ -126,13 +129,13 @@ public class Werewolf extends Animal
     }
     
     /**
-     * Check whether or not this fox is to give birth at this step.
+     * Check whether or not this werewolf is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newWerewolves A list to return newly born foxes.
+     * @param newWerewolves A list to return newly born werewolves.
      */
     private void giveBirth(List<Animal> newWerewolves)
     {
-        // New foxes are born into adjacent locations.
+        // New werewolves are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -159,7 +162,7 @@ public class Werewolf extends Animal
     }
 
     /**
-     * A fox can breed if it has reached the breeding age.
+     * A werewolf can breed if it has reached the breeding age.
      */
     private boolean canBreed()
     {

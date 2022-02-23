@@ -86,9 +86,20 @@ public class Simulator
         werewolfPrey.add("Jackalope");
         werewolfPrey.add("Unicorn");
 
+        HashSet<String> griffonPrey = new HashSet<>();
+        griffonPrey.add("Jackalope");
+        griffonPrey.add("Pegasus");
+
+        HashSet<String> cyclopsPrey = new HashSet<>();
+        cyclopsPrey.add("Werewolf");
+        cyclopsPrey.add("Griffon");
+
         data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
-        data.fillAnimalData("Unicorn", );
+        data.fillAnimalData("Unicorn", 5,40,0.12,2,14,null);
+        data.fillAnimalData("Werewolf", 5, 40, 0.12, 4, 9, null);
         data.fillAnimalData("Werewolf",15, 150, 0.08, 2, 15, werewolfPrey);
+        data.fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, null);
+        data.fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, null);
 
 
 
