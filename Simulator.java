@@ -42,7 +42,7 @@ public class Simulator
     // A graphical view of the simulation.
     private SimulatorView view;
     // The data for all the animals.
-    private AnimalData data;
+    private static AnimalData data;
     
     /**
      * Construct a simulation field with default size.
@@ -80,7 +80,6 @@ public class Simulator
 
         // Fills in data for all the animals
         data = new AnimalData();
-        data.fillAnimalData(, 5,  );
 
 
 
@@ -211,5 +210,6 @@ public class Simulator
     public static void main(String[] args) {
         Simulator sim = new Simulator();
         sim.runLongSimulation();
+
     }
 }
