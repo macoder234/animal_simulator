@@ -10,16 +10,18 @@ import java.util.Random;
  */
 public class Jackalope extends Animal
 {
-    // Characteristics shared by all jackalopes (class variables).
 
+    private AnimalData data = new AnimalData();
+    // Characteristics shared by all jackalopes (class variables).
+    private static String ANIMAL_NAME = "Jackalope";
     // The age at which a jackalope can start to breed.
-    private static final int BREEDING_AGE = 5;
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a jackalope can live.
-    private static final int MAX_AGE = 40;
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a jackalope breeding.
-    private static final double BREEDING_PROBABILITY = 0.12;
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     

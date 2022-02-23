@@ -3,19 +3,25 @@ import java.util.Random;
 
 public class Pegasus extends Animal {
 
-    // Characteristics shared by all pegasi (class variables).
-
-    // The age at which a pegasus can start to breed.
-    private static final int BREEDING_AGE = 5;
-    // The age to which a pegasus can live.
-    private static final int MAX_AGE = 40;
-    // The likelihood of a pegasus breeding.
-    private static final double BREEDING_PROBABILITY = 0.12;
+    private static String ANIMAL_NAME = "Griffon";
+    //
+    private AnimalData data = new AnimalData();
+    // The age at which a fox can start to breed.
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+    // The age to which a fox can live.
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+    // The likelihood of a fox breeding.
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+    // The food value of a single jackalope. In effect, this is the
+    // number of steps a werewolf can go before it has to eat again.
+    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
+    // The food value of a single pegasus. In effect, this is the
+    // number of steps a werewolf can go before it has to eat again.
+    private final int PEGASUS_FOOD_VALUE = data.getFoodValue("Pegasus");
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-
     // Individual characteristics (instance fields).
 
     // The pegasus's age.
