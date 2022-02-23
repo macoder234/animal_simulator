@@ -6,9 +6,9 @@ import java.awt.Color;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * containing various mythological animals.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author Manik Aggarwal, Saathveekan Satheshkumar, David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
 public class Simulator
@@ -41,6 +41,8 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    // The data for all the animals.
+    private AnimalData data;
     
     /**
      * Construct a simulation field with default size.
@@ -75,6 +77,11 @@ public class Simulator
         view.setColor(Unicorn.class, new Color(167, 4, 248));
         view.setColor(Pegasus.class, new Color(0,0,0));
         view.setColor(Cyclops.class, new Color(253, 0, 0));
+
+        // Fills in data for all the animals
+        data = new AnimalData();
+        data.fillAnimalData(, 5,  );
+
 
 
 
