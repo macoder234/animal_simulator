@@ -4,23 +4,23 @@ import java.util.ArrayList;
 
 public class AnimalData {
     private ArrayList<Animal> listOfAnimal;
-    private HashMap<Animal, Integer> breedingAge = new HashMap<>();
-    private HashMap<Animal, Integer> maxAge = new HashMap<>();
-    private HashMap<Animal, Double> breedingProbability = new HashMap<>();
-    private HashMap<Animal, Integer> maxLitterSize = new HashMap<>();
-    private HashMap<Animal, Integer> foodValue = new HashMap<>();
-    private HashMap<Animal, HashSet<Animal>> prey = new HashMap<>();
+    private HashMap<String, Integer> breedingAge = new HashMap<String, Integer>();
+    private HashMap<String, Integer> maxAge = new HashMap<String, Integer>();
+    private HashMap<String, Double> breedingProbability = new HashMap<String, Double>();
+    private HashMap<String, Integer> maxLitterSize = new HashMap<String, Integer>();
+    private HashMap<String, Integer> foodValue = new HashMap<String, Integer>();
+    private HashMap<String, HashSet<Animal>> prey = new HashMap<String, HashSet<Animal>>();
 
     public AnimalData() {
     }
 
-    public void fillAnimalData(Object animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<Animal> prey) {
-        this.breedingAge.put((Animal) animalName, breedingAge);
-        this.maxAge.put((Animal) animalName,maxAge);
-        this.breedingProbability.put((Animal) animalName,breedingProbability);
-        this.maxLitterSize.put((Animal) animalName,maxLitterSize);
-        this.foodValue.put((Animal) animalName,foodValue);
-        this.prey.put((Animal) animalName,prey);
+    public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<Animal> prey) {
+        this.breedingAge.put(animalName, breedingAge);
+        this.maxAge.put(animalName,maxAge);
+        this.breedingProbability.put(animalName,breedingProbability);
+        this.maxLitterSize.put(animalName,maxLitterSize);
+        this.foodValue.put(animalName,foodValue);
+        this.prey.put(animalName,prey);
     }
 
     public void getBreedingAge(Animal nameOfAnimal){
