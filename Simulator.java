@@ -81,6 +81,9 @@ public class Simulator
         // Fills in data for all the animals
         data = new AnimalData();
 
+        data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
+        data.fillAnimalData("Werewolf",
+
 
 
 

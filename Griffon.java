@@ -5,8 +5,12 @@ public class Griffon extends Animal
 {
     // Characteristics shared by all foxes (class variables).
 
+    // The name of the animal.
+    private String ANIMAL_NAME = "Griffon";
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 15;
+    //
+    private AnimalData data = new AnimalData();
     // The age to which a fox can live.
     private static final int MAX_AGE = 150;
     // The likelihood of a fox breeding.
@@ -15,12 +19,13 @@ public class Griffon extends Animal
     private static final int MAX_LITTER_SIZE = 2;
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private static final int JACKALOPE_FOOD_VALUE = 9;
+    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
     // The food value of a single pegasus. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private static final int PEGASUS_FOOD_VALUE = 5;
+    private final int PEGASUS_FOOD_VALUE = data.getFoodValue("Pegasus");
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
+
 
     // Individual characteristics (instance fields).
     // The fox's age.
