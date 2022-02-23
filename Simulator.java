@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.HashSet;
 import java.awt.Color;
 
 /**
@@ -81,8 +82,14 @@ public class Simulator
         // Fills in data for all the animals
         data = new AnimalData();
 
+        HashSet<String> werewolfPrey = new HashSet<>();
+        werewolfPrey.add("Jackalope");
+        werewolfPrey.add("Unicorn");
+
         data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
-        data.fillAnimalData("Werewolf",
+        data.fillAnimalData("Unicorn", );
+        data.fillAnimalData("Werewolf",15, 150, 0.08, 2, 15, werewolfPrey);
+
 
 
 

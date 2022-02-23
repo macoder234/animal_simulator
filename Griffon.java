@@ -6,17 +6,17 @@ public class Griffon extends Animal
     // Characteristics shared by all foxes (class variables).
 
     // The name of the animal.
-    private String ANIMAL_NAME = "Griffon";
-    // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private static String ANIMAL_NAME = "Griffon";
     //
     private AnimalData data = new AnimalData();
+    // The age at which a fox can start to breed.
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
     private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
@@ -44,7 +44,7 @@ public class Griffon extends Animal
     public Griffon(boolean randomAge, Field field, Location location)
     {
         super(field, location);
-        int average = (JACKALOPE_FOOD_VALUE + PEGASUS_FOOD_VALUE)/2;
+        int average = data.getAverageOfPreyValue(ANIMAL_NAME);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             health = rand.nextInt(average);
@@ -118,16 +118,17 @@ public class Griffon extends Animal
         List<Location> adjacent = field.adjacentLocations(getLocation());
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
-            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
-                jackalope.setDead();
-                health += JACKALOPE_FOOD_VALUE;
-                return where;
-            }
-            else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
-            pegasus.setDead();
-            health += PEGASUS_FOOD_VALUE;
-            return where;
-            }
+
+//            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
+//                jackalope.setDead();
+//                health += JACKALOPE_FOOD_VALUE;
+//                return where;
+//            }
+//            else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
+//            pegasus.setDead();
+//            health += PEGASUS_FOOD_VALUE;
+//            return where;
+//            }
         }
         return null;
     }
