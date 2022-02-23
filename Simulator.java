@@ -25,11 +25,11 @@ public class Simulator
     // The probability that a rabbit will be created in any given grid position.
     private static final double GRIFFON_CREATION_PROBABILITY = 0.01;
     // The probability that a griffon will be created in any given grid position.
-    private static final double PEGASUS_CREATION_PROBABILITY = 0.04;
+    private static final double PEGASUS_CREATION_PROBABILITY = 0.004;
     // The probability that a pegasus will be created in any given grid position.
-    private static final double UNICORN_CREATION_PROBABILITY = 0.04;
+    private static final double UNICORN_CREATION_PROBABILITY = 0.004;
     // The probability that a unicorn will be created in any given grid position.
-    private static final double CYCLOPS_CREATION_PROBABILITY = 0.04;
+    private static final double CYCLOPS_CREATION_PROBABILITY = 0.004;
     // The probability that a cyclops will be created in any given grid position.
 
 
