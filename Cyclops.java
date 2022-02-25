@@ -3,22 +3,26 @@ import java.util.Random;
 
 public class Cyclops extends Animal
 {
-    // Characteristics shared by all foxes (class variables).
 
+    private AnimalData data = new AnimalData();
+    // Characteristics shared by all foxes (class variables).
+    private static String ANIMAL_NAME = "Cyclops";
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
-    // The food value of a single rabbit. In effect, this is the
-    // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+    // The food value of a single jackalope. In effect, this is the
+    // number of steps a werewolf can go before it has to eat again.
+    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
+    // The food value of a single pegasus. In effect, this is the
+    // number of steps a werewolf can go before it has to eat again.
+    private final int PEGASUS_FOOD_VALUE = data.getFoodValue("Pegasus");
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-
     // Individual characteristics (instance fields).
     // The fox's age.
     private int age;
@@ -38,11 +42,11 @@ public class Cyclops extends Animal
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(RABBIT_FOOD_VALUE);
+            health = rand.nextInt(JACKALOPE_FOOD_VALUE);
         }
         else {
             age = 0;
-            health = RABBIT_FOOD_VALUE;
+            health = JACKALOPE_FOOD_VALUE;
         }
     }
 
@@ -111,7 +115,7 @@ public class Cyclops extends Animal
             Object animal = field.getObjectAt(where);
             if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                 jackalope.setDead();
-                health = RABBIT_FOOD_VALUE;
+                health = JACKALOPE_FOOD_VALUE;
                 return where;
             }
         }
@@ -158,4 +162,8 @@ public class Cyclops extends Animal
     {
         return age >= BREEDING_AGE;
     }
+
 }
+
+
+

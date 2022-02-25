@@ -12,14 +12,17 @@ public class Unicorn extends Animal
 {
     // Characteristics shared by all unicorns (class variables).
 
+    private static String ANIMAL_NAME = "Unicorn";
+    //
+    private AnimalData data = new AnimalData();
     // The age at which a unicorn can start to breed.
-    private static final int BREEDING_AGE = 5;
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a unicorn can live.
-    private static final int MAX_AGE = 40;
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a unicorn breeding.
-    private static final double BREEDING_PROBABILITY = 0.12;
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 4;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 

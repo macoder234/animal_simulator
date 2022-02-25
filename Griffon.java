@@ -5,22 +5,27 @@ public class Griffon extends Animal
 {
     // Characteristics shared by all foxes (class variables).
 
+    // The name of the animal.
+    private static String ANIMAL_NAME = "Griffon";
+    //
+    private AnimalData data = new AnimalData();
     // The age at which a fox can start to breed.
-    private static final int BREEDING_AGE = 15;
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a fox can live.
-    private static final int MAX_AGE = 150;
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a fox breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private static final int JACKALOPE_FOOD_VALUE = 9;
+    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
     // The food value of a single pegasus. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private static final int PEGASUS_FOOD_VALUE = 10;
+    private final int PEGASUS_FOOD_VALUE = data.getFoodValue("Pegasus");
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
+
 
     // Individual characteristics (instance fields).
     // The fox's age.
@@ -39,7 +44,7 @@ public class Griffon extends Animal
     public Griffon(boolean randomAge, Field field, Location location)
     {
         super(field, location);
-        int average = (JACKALOPE_FOOD_VALUE + PEGASUS_FOOD_VALUE)/2;
+        int average = data.getAverageOfPreyValue(ANIMAL_NAME);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             health = rand.nextInt(average);
@@ -105,6 +110,10 @@ public class Griffon extends Animal
     /**
      * Look for prey adjacent to the current location.
      * Only the first live rabbit is eaten.
+     *
+     * Note: We would like to iterate through the prey of
+     * the predators.
+     *
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood()
@@ -113,6 +122,7 @@ public class Griffon extends Animal
         List<Location> adjacent = field.adjacentLocations(getLocation());
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
+
             if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                 jackalope.setDead();
                 health += JACKALOPE_FOOD_VALUE;
@@ -126,7 +136,10 @@ public class Griffon extends Animal
         }
         return null;
     }
-
+// for(prey of animal){
+//    if (animal.ANIMAL_NAME.equals(prey) && animal.isAlive){
+//        prey.setDead();}
+//}
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.

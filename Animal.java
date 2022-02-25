@@ -84,9 +84,8 @@ public abstract class Animal
      * Return the animal's field.
      * @return The animal's field.
      */
-    protected Field getField()
-    {
+    protected Field getField() {
         return field;
     }
-//    this is pegasus.
+    
 }

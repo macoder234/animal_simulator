@@ -2,13 +2,14 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.HashSet;
 import java.awt.Color;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
- * containing rabbits and foxes.
+ * containing various mythological animals.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author Manik Aggarwal, Saathveekan Satheshkumar, David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
 public class Simulator
@@ -41,7 +42,9 @@ public class Simulator
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    
+    // The data for all the animals.
+    private static AnimalData data;
+
     /**
      * Construct a simulation field with default size.
      */
@@ -57,6 +60,8 @@ public class Simulator
      */
     public Simulator(int depth, int width)
     {
+        fillAnimalData();
+
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
@@ -76,18 +81,39 @@ public class Simulator
         view.setColor(Pegasus.class, new Color(0,0,0));
         view.setColor(Cyclops.class, new Color(253, 0, 0));
 
-
-
         // Setup a valid starting point.
         reset();
+    }
+
+    public void fillAnimalData() {
+        // Fills in data for all the animals
+        data = new AnimalData();
+
+        HashSet<String> werewolfPrey = new HashSet<>();
+        werewolfPrey.add("Jackalope");
+        werewolfPrey.add("Unicorn");
+
+        HashSet<String> griffonPrey = new HashSet<>();
+        griffonPrey.add("Jackalope");
+        griffonPrey.add("Pegasus");
+
+        HashSet<String> cyclopsPrey = new HashSet<>();
+        cyclopsPrey.add("Werewolf");
+        cyclopsPrey.add("Griffon");
+
+        data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
+        data.fillAnimalData("Unicorn", 5,40,0.12,2,14,null);
+        data.fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
+        data.fillAnimalData("Werewolf",15, 150, 0.08, 2, 15, null);
+        data.fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, null);
+        data.fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, null);
     }
     
     /**
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
      */
-    public void runLongSimulation()
-    {
+    public void runLongSimulation(){
         simulate(4000);
     }
     

@@ -2,8 +2,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * A simple model of a werewolf.
- * Werewolves age, move, eat unicorn/jackalopes, and die.
+ * A simple model of a fox.
+ * Werewolves age, move, eat rabbits, and die.
  * 
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
@@ -11,27 +11,28 @@ import java.util.Random;
 public class Werewolf extends Animal
 {
     // Characteristics shared by all werewolves (class variables).
-    
-    // The age at which a werewolf can start to breed.
-    private static final int BREEDING_AGE = 15;
-    // The age to which a werewolf can live.
-    private static final int MAX_AGE = 150;
-    // The likelihood of a werewolf breeding.
-    private static final double BREEDING_PROBABILITY = 0.08;
-    // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 2;
-    // The food value of a single unicorn/jackalope. In effect, this is the
-    // number of steps a werewolf can go before it has to eat again.
-    private static final int JACKALOPE_FOOD_VALUE = 9;
 
-    private static final int UNICORN_FOOD_VALUE = 10;
+    private static String ANIMAL_NAME = "Werewolf";
+    //
+    private AnimalData data = new AnimalData();
+    // The age at which a fox can start to breed.
+    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+    // The age to which a fox can live.
+    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+    // The likelihood of a werewolf breeding.
+    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
+    // The maximum number of births.
+    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+    // The food value of a single rabbit. In effect, this is the
+    // number of steps a fox can go before it has to eat again.
+    private static final int RABBIT_FOOD_VALUE = 9;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
     // Individual characteristics (instance fields).
-    // The werewolf's age.
+    // The fox's age.
     private int age;
-    // The werewolf's food level, which is increased by eating unicorns/jackalopes.
+    // The fox's food level, which is increased by eating rabbits.
     private int health;
 
     /**
@@ -47,17 +48,17 @@ public class Werewolf extends Animal
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(JACKALOPE_FOOD_VALUE);
+            health = rand.nextInt(RABBIT_FOOD_VALUE);
         }
         else {
             age = 0;
-            health = JACKALOPE_FOOD_VALUE;
+            health = RABBIT_FOOD_VALUE;
         }
     }
     
     /**
      * This is what the werewolf does most of the time: it hunts for
-     * unicorn/jackalope. In the process, it might breed, die of hunger,
+     * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
 //     * @param field The field currently occupied.
      * @param newWerewolves A list to return newly born werewolves.
@@ -108,8 +109,8 @@ public class Werewolf extends Animal
     }
     
     /**
-     * Look for unicorns/jackalopes adjacent to the current location.
-     * Only the first live unicorn/jackalope is eaten.
+     * Look for rabbits adjacent to the current location.
+     * Only the first live rabbit is eaten.
      * @return Where food was found, or null if it wasn't.
      */
     private Location findFood()
@@ -118,15 +119,10 @@ public class Werewolf extends Animal
         List<Location> adjacent = field.adjacentLocations(getLocation());
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
-            if ((animal instanceof Jackalope jackalope && jackalope.isAlive()))  {
+            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                     jackalope.setDead();
-                    health += JACKALOPE_FOOD_VALUE;
+                    health = RABBIT_FOOD_VALUE;
                     return where;
-            }
-            else if ((animal instanceof Unicorn unicorn && unicorn.isAlive())) {
-                unicorn.setDead();
-                health += UNICORN_FOOD_VALUE;
-                return where;
             }
         }
         return null;
@@ -172,5 +168,4 @@ public class Werewolf extends Animal
     {
         return age >= BREEDING_AGE;
     }
-
 }
