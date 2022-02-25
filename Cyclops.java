@@ -115,7 +115,7 @@ public class Cyclops extends Animal
             Object animal = field.getObjectAt(where);
             if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                 jackalope.setDead();
-                health = RABBIT_FOOD_VALUE;
+                health = JACKALOPE_FOOD_VALUE;
                 return where;
             }
         }

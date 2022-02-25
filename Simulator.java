@@ -113,8 +113,7 @@ public class Simulator
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
      */
-    public void runLongSimulation()
-    {
+    public void runLongSimulation(){
         simulate(4000);
     }
     

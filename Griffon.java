@@ -136,7 +136,10 @@ public class Griffon extends Animal
         }
         return null;
     }
-
+// for(prey of animal){
+//    if (animal.ANIMAL_NAME.equals(prey) && animal.isAlive){
+//        prey.setDead();}
+//}
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.

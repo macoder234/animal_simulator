@@ -11,6 +11,28 @@ public class AnimalData {
     private HashMap<String, HashSet<String>> prey = new HashMap<String, HashSet<String>>();
 
     public AnimalData() {
+        // Fills in data for all the animals
+
+        HashSet<String> werewolfPrey = new HashSet<>();
+        werewolfPrey.add("Jackalope");
+        werewolfPrey.add("Unicorn");
+
+        HashSet<String> griffonPrey = new HashSet<>();
+        griffonPrey.add("Jackalope");
+        griffonPrey.add("Pegasus");
+
+        HashSet<String> cyclopsPrey = new HashSet<>();
+        cyclopsPrey.add("Werewolf");
+        cyclopsPrey.add("Griffon");
+
+        fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
+        fillAnimalData("Unicorn", 5, 40, 0.01, 2, 14, null);
+        fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
+        fillAnimalData("Werewolf", 15, 150, 0.08, 2, 15, werewolfPrey);
+        fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, griffonPrey);
+        fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, cyclopsPrey);
+
+
     }
 
     public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey) {
@@ -36,7 +58,7 @@ public class AnimalData {
     }
 
     public double getBreedingProbability(String nameOfAnimal) {
-        return breedingProbability.get(nameOfAnimal);
+return breedingProbability.get(nameOfAnimal);
     }
 
     public int getMaxLitterSize(String nameOfAnimal) {
