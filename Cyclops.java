@@ -42,11 +42,11 @@ public class Cyclops extends Animal
         super(field, location);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(RABBIT_FOOD_VALUE);
+            health = rand.nextInt(JACKALOPE_FOOD_VALUE);
         }
         else {
             age = 0;
-            health = RABBIT_FOOD_VALUE;
+            health = JACKALOPE_FOOD_VALUE;
         }
     }
 
@@ -162,6 +162,7 @@ public class Cyclops extends Animal
     {
         return age >= BREEDING_AGE;
     }
+
 }
 
 

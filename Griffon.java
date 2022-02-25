@@ -123,16 +123,16 @@ public class Griffon extends Animal
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
 
-//            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
-//                jackalope.setDead();
-//                health += JACKALOPE_FOOD_VALUE;
-//                return where;
-//            }
-//            else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
-//            pegasus.setDead();
-//            health += PEGASUS_FOOD_VALUE;
-//            return where;
-//            }
+            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
+                jackalope.setDead();
+                health += JACKALOPE_FOOD_VALUE;
+                return where;
+            }
+            else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
+            pegasus.setDead();
+            health += PEGASUS_FOOD_VALUE;
+            return where;
+            }
         }
         return null;
     }

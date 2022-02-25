@@ -1,12 +1,11 @@
 import java.util.HashSet;
 import java.util.HashMap;
-import java.util.ArrayList;
 
 public class AnimalData {
-    private ArrayList<String> listOfAnimal;
-    private HashMap<String, Integer> breedingAge = new HashMap<String, Integer>();
-    private HashMap<String, Integer> maxAge = new HashMap<String, Integer>();
-    private HashMap<String, Double> breedingProbability = new HashMap<String, Double>();
+    private HashSet<String> listOfAnimal = new HashSet<>();
+    private HashMap<String, Integer> breedingAge = new HashMap<>();
+    private HashMap<String, Integer> maxAge = new HashMap<>();
+    private HashMap<String, Double> breedingProbability = new HashMap<>();
     private HashMap<String, Integer> maxLitterSize = new HashMap<String, Integer>();
     private HashMap<String, Integer> foodValue = new HashMap<String, Integer>();
     private HashMap<String, HashSet<String>> prey = new HashMap<String, HashSet<String>>();
@@ -15,6 +14,7 @@ public class AnimalData {
     }
 
     public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey) {
+        this.listOfAnimal.add(animalName);
         this.breedingAge.put(animalName, breedingAge);
         this.maxAge.put(animalName, maxAge);
         this.breedingProbability.put(animalName, breedingProbability);
@@ -82,90 +82,5 @@ public class AnimalData {
     }
 
 
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
