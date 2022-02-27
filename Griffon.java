@@ -6,7 +6,7 @@ public class Griffon extends Animal
     // Characteristics shared by all foxes (class variables).
 
     // The name of the animal.
-    private static String ANIMAL_NAME = "Griffon";
+    private static String ANIMAL_NAME;
     //
     private AnimalData data = new AnimalData();
     // The age at which a fox can start to breed.
@@ -41,9 +41,10 @@ public class Griffon extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Griffon(boolean randomAge, Field field, Location location)
+    public Griffon(boolean randomAge, Field field, Location location, String animalName)
     {
-        super(field, location);
+        super(field, location, animalName);
+        ANIMAL_NAME = animalName;
         int average = data.getAverageOfPreyValue(ANIMAL_NAME);
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
@@ -88,13 +89,13 @@ public class Griffon extends Animal
     /**
      * Increase the age. This could result in the fox's death.
      */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+//    private void incrementAge()
+//    {
+//        age++;
+//        if(age > MAX_AGE) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Make this fox more hungry. This could result in the fox's death.
@@ -116,7 +117,7 @@ public class Griffon extends Animal
      *
      * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood()
+    protected Location findFood()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -145,7 +146,7 @@ public class Griffon extends Animal
      * New births will be made into free adjacent locations.
      * @param newGriffons A list to return newly born foxes.
      */
-    private void giveBirth(List<Animal> newGriffons)
+    protected void giveBirth(List<Animal> newAnimals)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -154,24 +155,24 @@ public class Griffon extends Animal
         int births = breed();
         for(int b = 0; b < births && !free.isEmpty(); b++) {
             Location loc = free.remove(0);
-            Griffon young = new Griffon(false, field, loc);
-            newGriffons.add(young);
+            Griffon young = new Griffon(false, field, loc, ANIMAL_NAME);
+            newAnimals.add(young);
         }
     }
 
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
+//    /**
+//     * Generate a number representing the number of births,
+//     * if it can breed.
+//     * @return The number of births (may be zero).
+//     */
+//    private int breed()
+//    {
+//        int births = 0;
+//        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+//            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+//        }
+//        return births;
+//    }
 
     /**
      * A fox can breed if it has reached the breeding age.

@@ -18,11 +18,11 @@ public class Werewolf extends Animal
     // The age at which a fox can start to breed.
     private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
     // The age to which a fox can live.
-    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+//    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a werewolf breeding.
-    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
+//    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
     // The maximum number of births.
-    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+//    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
     private static final int RABBIT_FOOD_VALUE = 9;
@@ -31,9 +31,9 @@ public class Werewolf extends Animal
     
     // Individual characteristics (instance fields).
     // The fox's age.
-    private int age;
+//    private int age;
     // The fox's food level, which is increased by eating rabbits.
-    private int health;
+//    private int health;
 
     /**
      * Create a werewolf. A werewolf can be created as a new born (age zero
@@ -43,59 +43,54 @@ public class Werewolf extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Werewolf(boolean randomAge, Field field, Location location)
-    {
-        super(field, location);
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(RABBIT_FOOD_VALUE);
-        }
-        else {
-            age = 0;
-            health = RABBIT_FOOD_VALUE;
-        }
+    public Werewolf(boolean randomAge, Field field, Location location, String animalName){
+
+        super(field, location,animalName);
+        ANIMAL_NAME = animalName;
+
+
     }
     
-    /**
-     * This is what the werewolf does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
-     * or die of old age.
-//     * @param field The field currently occupied.
-     * @param newWerewolves A list to return newly born werewolves.
-     */
-    public void act(List<Animal> newWerewolves)
-    {
-        incrementAge();
-        incrementHunger();
-        if(isAlive()) {
-            giveBirth(newWerewolves);            
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if(newLocation == null) { 
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
-            }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+//    /**
+//     * This is what the werewolf does most of the time: it hunts for
+//     * rabbits. In the process, it might breed, die of hunger,
+//     * or die of old age.
+////     * @param field The field currently occupied.
+//     * @param newWerewolves A list to return newly born werewolves.
+//     */
+//    public void act(List<Animal> newWerewolves)
+//    {
+//        incrementAge();
+//        incrementHunger();
+//        if(isAlive()) {
+//            giveBirth(newWerewolves);
+//            // Move towards a source of food if found.
+//            Location newLocation = findFood();
+//            if(newLocation == null) {
+//                // No food found - try to move to a free location.
+//                newLocation = getField().freeAdjacentLocation(getLocation());
+//            }
+//            // See if it was possible to move.
+//            if(newLocation != null) {
+//                setLocation(newLocation);
+//            }
+//            else {
+//                // Overcrowding.
+//                setDead();
+//            }
+//        }
+//    }
 
-    /**
-     * Increase the age. This could result in the werewolf's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+//    /**
+//     * Increase the age. This could result in the werewolf's death.
+//     */
+//    private void incrementAge()
+//    {
+//        age++;
+//        if(age > MAX_AGE) {
+//            setDead();
+//        }
+//    }
     
     /**
      * Make this werewolf more hungry. This could result in the werewolf's death.
@@ -113,7 +108,7 @@ public class Werewolf extends Animal
      * Only the first live rabbit is eaten.
      * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood()
+    protected Location findFood()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -133,7 +128,7 @@ public class Werewolf extends Animal
      * New births will be made into free adjacent locations.
      * @param newWerewolves A list to return newly born werewolves.
      */
-    private void giveBirth(List<Animal> newWerewolves)
+    protected void giveBirth(List<Animal> newAnimals)
     {
         // New werewolves are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -142,30 +137,30 @@ public class Werewolf extends Animal
         int births = breed();
         for(int b = 0; b < births && !free.isEmpty(); b++) {
             Location loc = free.remove(0);
-            Werewolf young = new Werewolf(false, field, loc);
-            newWerewolves.add(young);
+            Werewolf young = new Werewolf(false, field, loc, ANIMAL_NAME);
+            newAnimals.add(young);
         }
     }
         
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
+//    /**
+//     * Generate a number representing the number of births,
+//     * if it can breed.
+//     * @return The number of births (may be zero).
+//     */
+//    private int breed()
+//    {
+//        int births = 0;
+//        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+//            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+//        }
+//        return births;
+//    }
 
-    /**
-     * A werewolf can breed if it has reached the breeding age.
-     */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+//    /**
+//     * A werewolf can breed if it has reached the breeding age.
+//     */
+//    private boolean canBreed()
+//    {
+//        return age >= BREEDING_AGE;
+//    }
 }

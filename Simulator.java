@@ -180,32 +180,32 @@ public class Simulator
             for(int col = 0; col < field.getWidth(); col++) {
                 if(rand.nextDouble() <= WEREWOLF_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Werewolf werewolf = new Werewolf(true, field, location);
+                    Werewolf werewolf = new Werewolf(true, field, location, "Werewolf");
                     animals.add(werewolf);
                 }
                 else if(rand.nextDouble() <= JACKALOPE_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Jackalope Jackalope = new Jackalope(true, field, location);
+                    Jackalope Jackalope = new Jackalope(true, field, location, "Jackalope");
                     animals.add(Jackalope);
                 }
                 else if(rand.nextDouble() <= GRIFFON_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Griffon griffon = new Griffon(true, field, location);
+                    Griffon griffon = new Griffon(true, field, location, "Griffon");
                     animals.add(griffon);
                 }
                 else if(rand.nextDouble() <= PEGASUS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Pegasus pegasus = new Pegasus(true, field, location);
+                    Pegasus pegasus = new Pegasus(true, field, location, "Pegasus");
                     animals.add(pegasus);
                 }
                 else if(rand.nextDouble() <= CYCLOPS_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Cyclops cyclops = new Cyclops(true, field, location);
+                    Cyclops cyclops = new Cyclops(true, field, location, "Cyclops");
                     animals.add(cyclops);
                 }
                 else if(rand.nextDouble() <= UNICORN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Unicorn unicorn = new Unicorn(true, field, location);
+                    Unicorn unicorn = new Unicorn(true, field, location, "Unicorn");
                     animals.add(unicorn);
                 }
                 // else leave the location empty.

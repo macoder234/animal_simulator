@@ -3,17 +3,17 @@ import java.util.Random;
 
 public class Pegasus extends Animal {
 
-    private static String ANIMAL_NAME = "Griffon";
+    private static String ANIMAL_NAME;
     //
-    private AnimalData data = new AnimalData();
-    // The age at which a fox can start to breed.
-    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
-    // The age to which a fox can live.
-    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
-    // The likelihood of a fox breeding.
-    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
-    // The maximum number of births.
-    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+//    private AnimalData data = new AnimalData();
+//    // The age at which a fox can start to breed.
+//    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+//    // The age to which a fox can live.
+//    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+//    // The likelihood of a fox breeding.
+//    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
+//    // The maximum number of births.
+//    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
     private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
@@ -35,9 +35,10 @@ public class Pegasus extends Animal {
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Pegasus(boolean randomAge, Field field, Location location)
+    public Pegasus(boolean randomAge, Field field, Location location, String animalName)
     {
-        super(field, location);
+        super(field, location, animalName);
+        ANIMAL_NAME = animalName;
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
@@ -45,7 +46,7 @@ public class Pegasus extends Animal {
     }
 
     /**
-     * This is what the pegasus does most of the time - it runs 
+     * This is what the pegasus does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      * @param newPegasi A list to return newly born pegasi.
      */
@@ -70,20 +71,20 @@ public class Pegasus extends Animal {
      * Increase the age.
      * This could result in the pegasus's death.
      */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+//    private void incrementAge()
+//    {
+//        age++;
+//        if(age > MAX_AGE) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Check whether or not this pegasus is to give birth at this step.
      * New births will be made into free adjacent locations.
      * @param newPegasi A list to return newly born pegasi.
      */
-    private void giveBirth(List<Animal> newPegasi)
+    protected void giveBirth(List<Animal> newAnimals)
     {
         // New pegasi are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -92,8 +93,8 @@ public class Pegasus extends Animal {
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Pegasus young = new Pegasus(false, field, loc);
-            newPegasi.add(young);
+            Pegasus young = new Pegasus(false, field, loc, ANIMAL_NAME);
+            newAnimals.add(young);
         }
     }
 

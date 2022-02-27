@@ -6,9 +6,12 @@ public class AnimalData {
     private HashMap<String, Integer> breedingAge = new HashMap<>();
     private HashMap<String, Integer> maxAge = new HashMap<>();
     private HashMap<String, Double> breedingProbability = new HashMap<>();
-    private HashMap<String, Integer> maxLitterSize = new HashMap<String, Integer>();
-    private HashMap<String, Integer> foodValue = new HashMap<String, Integer>();
-    private HashMap<String, HashSet<String>> prey = new HashMap<String, HashSet<String>>();
+    private HashMap<String, Integer> maxLitterSize = new HashMap<>();
+    private HashMap<String, Integer> foodValue = new HashMap<>();
+    private HashMap<String, Boolean> oppoGenderRequired = new HashMap<>();
+    private HashMap<String, HashSet<String>> prey = new HashMap<>();
+//    private HashMap<String, HashSet<Animal>> animalPrey = new HashMap<>();
+
 
     public AnimalData() {
         // Fills in data for all the animals
@@ -25,14 +28,18 @@ public class AnimalData {
         cyclopsPrey.add("Werewolf");
         cyclopsPrey.add("Griffon");
 
+//        HashSet<Animal> werewolfAnimalPrey = new HashSet<>();
+//        Jackalope jackalope = new Jackalope();
+//        werewolfAnimalPrey.add(jackalope);
+
+
+        HashMap<String, Boolean>
         fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
         fillAnimalData("Unicorn", 5, 40, 0.01, 2, 14, null);
         fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
         fillAnimalData("Werewolf", 15, 150, 0.08, 2, 15, werewolfPrey);
         fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, griffonPrey);
         fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, cyclopsPrey);
-
-
     }
 
     public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey) {
@@ -43,6 +50,8 @@ public class AnimalData {
         this.maxLitterSize.put(animalName, maxLitterSize);
         this.foodValue.put(animalName, foodValue);
         this.prey.put(animalName, prey);
+        this.oppoGenderRequired.put(animalName, );
+        //
     }
 
 

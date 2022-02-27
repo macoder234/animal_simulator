@@ -12,7 +12,7 @@ public class Unicorn extends Animal
 {
     // Characteristics shared by all unicorns (class variables).
 
-    private static String ANIMAL_NAME = "Unicorn";
+    private static String ANIMAL_NAME;
     //
     private AnimalData data = new AnimalData();
     // The age at which a unicorn can start to breed.
@@ -39,9 +39,10 @@ public class Unicorn extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Unicorn(boolean randomAge, Field field, Location location)
+    public Unicorn(boolean randomAge, Field field, Location location, String animalName)
     {
-        super(field, location);
+        super(field, location, animalName);
+        ANIMAL_NAME = animalName;
         age = 0;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
@@ -74,20 +75,20 @@ public class Unicorn extends Animal
      * Increase the age.
      * This could result in the unicorn's death.
      */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+//    private void incrementAge()
+//    {
+//        age++;
+//        if(age > MAX_AGE) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Check whether or not this unicorn is to give birth at this step.
      * New births will be made into free adjacent locations.
      * @param newUnicorns A list to return newly born unicorns.
      */
-    private void giveBirth(List<Animal> newUnicorns)
+    protected void giveBirth(List<Animal> newAnimals)
     {
         // New unicorns are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -96,8 +97,8 @@ public class Unicorn extends Animal
         int births = breed();
         for(int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Unicorn young = new Unicorn(false, field, loc);
-            newUnicorns.add(young);
+            Unicorn young = new Unicorn(false, field, loc, ANIMAL_NAME);
+            newAnimals.add(young);
         }
     }
 

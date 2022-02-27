@@ -8,13 +8,13 @@ public class Cyclops extends Animal
     // Characteristics shared by all foxes (class variables).
     private static String ANIMAL_NAME = "Cyclops";
     // The age at which a fox can start to breed.
-    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
-    // The age to which a fox can live.
-    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
-    // The likelihood of a fox breeding.
-    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
-    // The maximum number of births.
-    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+//    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+//    // The age to which a fox can live.
+//    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+//    // The likelihood of a fox breeding.
+//    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
+//    // The maximum number of births.
+//    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
     private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
@@ -37,9 +37,10 @@ public class Cyclops extends Animal
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Cyclops(boolean randomAge, Field field, Location location)
-    {
-        super(field, location);
+    public Cyclops(boolean randomAge, Field field, Location location, String animalName){
+
+        super(field, location,animalName);
+        ANIMAL_NAME = animalName;
         if(randomAge) {
             age = rand.nextInt(MAX_AGE);
             health = rand.nextInt(JACKALOPE_FOOD_VALUE);
@@ -83,13 +84,13 @@ public class Cyclops extends Animal
     /**
      * Increase the age. This could result in the fox's death.
      */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+//    private void incrementAge()
+//    {
+//        age++;
+//        if(age > MAX_AGE) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Make this fox more hungry. This could result in the fox's death.
@@ -107,7 +108,7 @@ public class Cyclops extends Animal
      * Only the first live rabbit is eaten.
      * @return Where food was found, or null if it wasn't.
      */
-    private Location findFood()
+    protected Location findFood()
     {
         Field field = getField();
         List<Location> adjacent = field.adjacentLocations(getLocation());
@@ -125,9 +126,9 @@ public class Cyclops extends Animal
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newCyclopes A list to return newly born foxes.
+     * @param newAnimals A list to return newly born foxes.
      */
-    private void giveBirth(List<Animal> newCyclopes)
+    protected void giveBirth(List<Animal> newAnimals)
     {
         // New foxes are born into adjacent locations.
         // Get a list of adjacent free locations.
