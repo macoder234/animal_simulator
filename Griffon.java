@@ -63,28 +63,28 @@ public class Griffon extends Animal
      //     * @param field The field currently occupied.
      * @param newGriffons A list to return newly born foxes.
      */
-    public void act(List<Animal> newGriffons)
-    {
-        incrementAge();
-        incrementHunger();
-        if(isAlive()) {
-            giveBirth(newGriffons);
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if(newLocation == null) {
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
-            }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+//    public void act(List<Animal> newGriffons, boolean isDay)
+//    {
+//        incrementAge();
+//        incrementHunger();
+//        if(isAlive()) {
+//            giveBirth(newGriffons);
+//            // Move towards a source of food if found.
+//            Location newLocation = findFood();
+//            if(newLocation == null) {
+//                // No food found - try to move to a free location.
+//                newLocation = getField().freeAdjacentLocation(getLocation());
+//            }
+//            // See if it was possible to move.
+//            if(newLocation != null) {
+//                setLocation(newLocation);
+//            }
+//            else {
+//                // Overcrowding.
+//                setDead();
+//            }
+//        }
+//    }
 
     /**
      * Increase the age. This could result in the fox's death.

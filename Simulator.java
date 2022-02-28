@@ -22,7 +22,7 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double WEREWOLF_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double JACKALOPE_CREATION_PROBABILITY = 0.08;
+    private static final double JACKALOPE_CREATION_PROBABILITY = 0.5;
     // The probability that a rabbit will be created in any given grid position.
     private static final double GRIFFON_CREATION_PROBABILITY = 0.01;
     // The probability that a griffon will be created in any given grid position.
@@ -135,6 +135,7 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
+        changeisDay();
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
         // Let all rabbits act.

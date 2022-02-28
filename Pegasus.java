@@ -116,8 +116,8 @@ public class Pegasus extends Animal {
      * A pegasus can breed if it has reached the breeding age.
      * @return true if the pegasus can breed, false otherwise.
      */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+//    private boolean canBreed()
+//    {
+//        return age >= BREEDING_AGE;
+//    }
 }

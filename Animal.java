@@ -62,26 +62,31 @@ public abstract class Animal
      //     * @param field The field currently occupied.
      * @param newAnimals A list to return newly born animals.
      */
-    public void act(List<Animal> newAnimals, boolean isDay)
-    {
-        incrementAge();
-        incrementHunger();
-        if(isAlive()) {
-            giveBirth(newAnimals);
-            // Move towards a source of food if found.
-            Location newLocation = findFood();
-            if(newLocation == null) {
-                // No food found - try to move to a free location.
-                newLocation = getField().freeAdjacentLocation(getLocation());
+    public void act(List<Animal> newAnimals, boolean isDay) {
+        if (isDay) {
+            incrementAge();
+            incrementHunger();
+            if (isAlive()) {
+                giveBirth(newAnimals);
+                // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if (newLocation == null) {
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                // See if it was possible to move.
+                if (newLocation != null) {
+                    setLocation(newLocation);
+                }
+                else {
+                    // Overcrowding.
+                    setDead();
+                }
+//                System.out.println("day");
             }
-            // See if it was possible to move.
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
+        }
+        else {
+//            System.out.println("night");
         }
     }
 
@@ -122,7 +127,7 @@ public abstract class Animal
     /**
      * A werewolf can breed if it has reached the breeding age.
      */
-    private boolean canBreed()
+    protected boolean canBreed()
     {
         return age >= BREEDING_AGE;
     }

@@ -95,7 +95,7 @@ public class Jackalope extends Animal
      * New births will be made into free adjacent locations.
      * @param newjackalopes A list to return newly born jackalopes.
      */
-    private void giveBirth(List<Animal> newjackalopes)
+    protected void giveBirth(List<Animal> newAnimals)
     {
         // New jackalopes are born into adjacent locations.
         // Get a list of adjacent free locations.
@@ -106,6 +106,7 @@ public class Jackalope extends Animal
             for (int b = 0; b < births && free.size() > 0; b++) {
                 Location loc = free.remove(0);
                 Jackalope young = new Jackalope(false, field, loc, ANIMAL_NAME);
+
                 newAnimals.add(young);
             }
         }
@@ -125,6 +126,7 @@ public class Jackalope extends Animal
             for (Location where : adjacent) {
                 Object animal = field.getObjectAt(where);
 
+                System.out.println("3");
                 return animal instanceof Jackalope jackalope
                         && jackalope.isAlive()
                         && jackalope.canBreed()
@@ -138,7 +140,7 @@ public class Jackalope extends Animal
     /*
     @param animalsGender. If true the animal is a male, if false then female
      */
-    private boolean checkOppoGender(boolean animalsGender){
+    private boolean checkOppoGender(boolean animalsGender) {
         return animalsGender != isMale;
     }
 
@@ -163,8 +165,8 @@ public class Jackalope extends Animal
      * A jackalope can breed if it has reached the breeding age.
      * @return true if the jackalope can breed, false otherwise.
      */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+//    private boolean canBreed()
+//    {
+//        return age >= BREEDING_AGE;
+//    }
 }

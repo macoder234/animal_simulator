@@ -47,8 +47,15 @@ public class Werewolf extends Animal
 
         super(field, location,animalName);
         ANIMAL_NAME = animalName;
-
-
+        int average = data.getAverageOfPreyValue(ANIMAL_NAME);
+        if(randomAge) {
+            age = rand.nextInt(MAX_AGE);
+            health = rand.nextInt(average);
+        }
+        else {
+            age = 0;
+            health = average;
+        }
     }
     
     /**
@@ -58,7 +65,7 @@ public class Werewolf extends Animal
      * @param field The field currently occupied.
      * @param newWerewolves A list to return newly born werewolves.
      */
-//    public void act(List<Animal> newWerewolves)
+//    public void act(List<Animal> newWerewolves, boolean isDay)
 //    {
 //        incrementAge();
 //        incrementHunger();

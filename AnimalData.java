@@ -33,12 +33,12 @@ public class AnimalData {
 //        werewolfAnimalPrey.add(jackalope);
 
 
-        fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null, true);
+        fillAnimalData("Jackalope", 5, 40, 1.0, 4, 9, null, true);
         fillAnimalData("Unicorn", 8, 100, 0.04, 2, 14, null, false);
         fillAnimalData("Pegasus", 9, 90, 0.06, 4, 9, null, true);
         fillAnimalData("Werewolf", 7, 70, 0.08, 2, 15, werewolfPrey, false);
         fillAnimalData("Griffon", 9, 80, 0.09, 4, 9, griffonPrey, false);
-        fillAnimalData("Cyclops", 20, 500, 0.01, 4, 9, cyclopsPrey, false);
+        fillAnimalData("Cyclops", 7, 80, 0.09, 4, 9, cyclopsPrey, false);
     }
 
     public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey, boolean oppGenderRequired) {
