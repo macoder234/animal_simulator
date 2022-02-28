@@ -10,7 +10,7 @@ public class AnimalData {
     private HashMap<String, Integer> foodValue = new HashMap<>();
     private HashMap<String, Boolean> oppoGenderRequired = new HashMap<>();
     private HashMap<String, HashSet<String>> prey = new HashMap<>();
-//    private HashMap<String, HashSet<Animal>> animalPrey = new HashMap<>();
+    //    private HashMap<String, HashSet<Animal>> animalPrey = new HashMap<>();
 
 
     public AnimalData() {
@@ -33,16 +33,15 @@ public class AnimalData {
 //        werewolfAnimalPrey.add(jackalope);
 
 
-        HashMap<String, Boolean>
-        fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
-        fillAnimalData("Unicorn", 5, 40, 0.01, 2, 14, null);
-        fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
-        fillAnimalData("Werewolf", 15, 150, 0.08, 2, 15, werewolfPrey);
-        fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, griffonPrey);
-        fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, cyclopsPrey);
+        fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null, true);
+        fillAnimalData("Unicorn", 8, 100, 0.04, 2, 14, null, false);
+        fillAnimalData("Pegasus", 9, 90, 0.06, 4, 9, null, true);
+        fillAnimalData("Werewolf", 7, 70, 0.08, 2, 15, werewolfPrey, false);
+        fillAnimalData("Griffon", 9, 80, 0.09, 4, 9, griffonPrey, false);
+        fillAnimalData("Cyclops", 20, 500, 0.01, 4, 9, cyclopsPrey, false);
     }
 
-    public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey) {
+    public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey, boolean oppGenderRequired) {
         this.listOfAnimal.add(animalName);
         this.breedingAge.put(animalName, breedingAge);
         this.maxAge.put(animalName, maxAge);
@@ -50,8 +49,8 @@ public class AnimalData {
         this.maxLitterSize.put(animalName, maxLitterSize);
         this.foodValue.put(animalName, foodValue);
         this.prey.put(animalName, prey);
-        this.oppoGenderRequired.put(animalName, );
-        //
+        this.oppoGenderRequired.put(animalName, oppGenderRequired);
+
     }
 
 

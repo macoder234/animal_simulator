@@ -61,7 +61,7 @@ public class Jackalope extends Animal
     {
         incrementAge();
         if(isAlive()) {
-            giveBirth(newjackalopes);            
+            giveBirth(newjackalopes);
             // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
             if(newLocation != null) {
@@ -99,16 +99,52 @@ public class Jackalope extends Animal
     {
         // New jackalopes are born into adjacent locations.
         // Get a list of adjacent free locations.
-        Field field = getField();
-        List<Location> free = field.getFreeAdjacentLocations(getLocation());
-        int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
-            Location loc = free.remove(0);
-            Jackalope young = new Jackalope(false, field, loc);
-            newjackalopes.add(young);
+        if (oppGenderPresent()) {
+            Field field = getField();
+            List<Location> free = field.getFreeAdjacentLocations(getLocation());
+            int births = breed();
+            for (int b = 0; b < births && free.size() > 0; b++) {
+                Location loc = free.remove(0);
+                Jackalope young = new Jackalope(false, field, loc, ANIMAL_NAME);
+                newAnimals.add(young);
+            }
         }
     }
-        
+
+
+    /**
+     * Check adjacent locations and return true if locations contain
+     * animals of opposite genders.
+     * @return returns if there is an opposite gender near
+     */
+    private boolean oppGenderPresent() {
+
+        if (data.getOppoGenderRequired(ANIMAL_NAME)) {
+            Field field = getField();
+            List<Location> adjacent = field.adjacentLocations(getLocation());
+            for (Location where : adjacent) {
+                Object animal = field.getObjectAt(where);
+
+                return animal instanceof Jackalope jackalope
+                        && jackalope.isAlive()
+                        && jackalope.canBreed()
+                        && checkOppoGender((jackalope.getGender()));
+            }
+        }
+        return true;
+    }
+
+
+    /*
+    @param animalsGender. If true the animal is a male, if false then female
+     */
+    private boolean checkOppoGender(boolean animalsGender){
+        return animalsGender != isMale;
+    }
+
+    private boolean getGender() {
+        return isMale;
+    }
 //    /**
 //     * Generate a number representing the number of births,
 //     * if it can breed.

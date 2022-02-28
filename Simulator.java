@@ -38,12 +38,11 @@ public class Simulator
     private List<Animal> animals;
     // The current state of the field.
     private Field field;
+    private boolean isDay;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
-    // The data for all the animals.
-    private static AnimalData data;
 
     /**
      * Construct a simulation field with default size.
@@ -60,8 +59,6 @@ public class Simulator
      */
     public Simulator(int depth, int width)
     {
-        fillAnimalData();
-
         if(width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
@@ -85,29 +82,29 @@ public class Simulator
         reset();
     }
 
-    public void fillAnimalData() {
-        // Fills in data for all the animals
-        data = new AnimalData();
-
-        HashSet<String> werewolfPrey = new HashSet<>();
-        werewolfPrey.add("Jackalope");
-        werewolfPrey.add("Unicorn");
-
-        HashSet<String> griffonPrey = new HashSet<>();
-        griffonPrey.add("Jackalope");
-        griffonPrey.add("Pegasus");
-
-        HashSet<String> cyclopsPrey = new HashSet<>();
-        cyclopsPrey.add("Werewolf");
-        cyclopsPrey.add("Griffon");
-
-        data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null);
-        data.fillAnimalData("Unicorn", 5,40,0.12,2,14,null);
-        data.fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
-        data.fillAnimalData("Werewolf",15, 150, 0.08, 2, 15, null);
-        data.fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, null);
-        data.fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, null);
-    }
+//    public void fillAnimalData() {
+//        // Fills in data for all the animals
+//        data = new AnimalData();
+//
+//        HashSet<String> werewolfPrey = new HashSet<>();
+//        werewolfPrey.add("Jackalope");
+//        werewolfPrey.add("Unicorn");
+//
+//        HashSet<String> griffonPrey = new HashSet<>();
+//        griffonPrey.add("Jackalope");
+//        griffonPrey.add("Pegasus");
+//
+//        HashSet<String> cyclopsPrey = new HashSet<>();
+//        cyclopsPrey.add("Werewolf");
+//        cyclopsPrey.add("Griffon");
+//
+//        data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null, );
+//        data.fillAnimalData("Unicorn", 5,40,0.12,2,14,null);
+//        data.fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
+//        data.fillAnimalData("Werewolf",15, 150, 0.08, 2, 15, null);
+//        data.fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, null);
+//        data.fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, null);
+//    }
     
     /**
      * Run the simulation from its current state for a reasonably long period,
@@ -138,18 +135,17 @@ public class Simulator
     public void simulateOneStep()
     {
         step++;
-
         // Provide space for newborn animals.
-        List<Animal> newAnimals = new ArrayList<>();        
+        List<Animal> newAnimals = new ArrayList<>();
         // Let all rabbits act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals);
-            if(! animal.isAlive()) {
+            animal.act(newAnimals, isDay);
+            if(! animal.isAlive()){
                 it.remove();
             }
         }
-               
+
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
 
@@ -162,6 +158,7 @@ public class Simulator
     public void reset()
     {
         step = 0;
+        isDay = true;
         animals.clear();
         populate();
         
@@ -230,5 +227,6 @@ public class Simulator
     public static void main(String[] args) {
         Simulator sim = new Simulator();
         sim.runLongSimulation();
+
     }
 }

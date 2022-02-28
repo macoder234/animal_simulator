@@ -51,13 +51,13 @@ public class Werewolf extends Animal
 
     }
     
-//    /**
-//     * This is what the werewolf does most of the time: it hunts for
-//     * rabbits. In the process, it might breed, die of hunger,
-//     * or die of old age.
-////     * @param field The field currently occupied.
-//     * @param newWerewolves A list to return newly born werewolves.
-//     */
+    /**
+     * This is what the werewolf does most of the time: it hunts for
+     * rabbits. In the process, it might breed, die of hunger,
+     * or die of old age.
+     * @param field The field currently occupied.
+     * @param newWerewolves A list to return newly born werewolves.
+     */
 //    public void act(List<Animal> newWerewolves)
 //    {
 //        incrementAge();

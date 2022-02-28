@@ -62,7 +62,7 @@ public abstract class Animal
      //     * @param field The field currently occupied.
      * @param newAnimals A list to return newly born animals.
      */
-    public void act(List<Animal> newAnimals)
+    public void act(List<Animal> newAnimals, boolean isDay)
     {
         incrementAge();
         incrementHunger();
