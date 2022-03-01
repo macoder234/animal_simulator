@@ -62,8 +62,8 @@ public abstract class Animal
      //     * @param field The field currently occupied.
      * @param newAnimals A list to return newly born animals.
      */
-    public void act(List<Animal> newAnimals, boolean isDay) {
-        if (isDay) {
+    public void act(List<Animal> newAnimals, boolean dayOfTime){
+
             incrementAge();
             incrementHunger();
             if (isAlive()) {
@@ -84,10 +84,6 @@ public abstract class Animal
                 }
 //                System.out.println("day");
             }
-        }
-        else {
-//            System.out.println("night");
-        }
     }
 
     protected abstract Location findFood();

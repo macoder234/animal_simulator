@@ -25,7 +25,9 @@ public class Werewolf extends Animal
 //    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single rabbit. In effect, this is the
     // number of steps a fox can go before it has to eat again.
-    private static final int RABBIT_FOOD_VALUE = 9;
+    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
+    private final int UNICORN_FOOD_VALUE = data.getFoodValue("Unicorn");
+
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     
@@ -117,14 +119,24 @@ public class Werewolf extends Animal
      */
     protected Location findFood()
     {
-        Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-        for (Location where : adjacent) {
-            Object animal = field.getObjectAt(where);
-            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
+        if (exceedMaxHealth()) {
+            Field field = getField();
+            List<Location> adjacent = field.adjacentLocations(getLocation());
+            for (Location where : adjacent) {
+                Object animal = field.getObjectAt(where);
+//            for (Animal prey: data.getAnimalPrey(ANIMAL_NAME)){
+                if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                     jackalope.setDead();
-                    health = RABBIT_FOOD_VALUE;
+                    health += JACKALOPE_FOOD_VALUE;
+                    System.out.println("werewolf ate jackalope");
                     return where;
+                }
+                else if (animal instanceof Unicorn unicorn && unicorn.isAlive()) {
+                    unicorn.setDead();
+                    health += UNICORN_FOOD_VALUE;
+                    System.out.println("werewolf ate unicorn");
+                    return where;
+                }
             }
         }
         return null;
