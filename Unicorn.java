@@ -13,6 +13,10 @@ public class Unicorn extends Animal
     // Characteristics shared by all unicorns (class variables).
 
     private static String ANIMAL_NAME;
+
+    private final int HYACINTH_FOOD_VALUE = data.getFoodValue("Hyacinth");
+    private final int MANDRAKE_FOOD_VALUE = data.getFoodValue("Mandrake");
+
     //
     private AnimalData data = new AnimalData();
     // The age at which a unicorn can start to breed.

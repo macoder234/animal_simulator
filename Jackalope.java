@@ -23,16 +23,15 @@ public class Jackalope extends Animal
 //    // The maximum number of births.
 //    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
-    
+
+
+    private final int HYACINTH_FOOD_VALUE = data.getFoodValue("Hyacinth");
+    private final int MANDRAKE_FOOD_VALUE = data.getFoodValue("Mandrake");
+
     // Individual characteristics (instance fields).
     
     // The jackalope's age.
     private int age;
-
-    public Jackalope() {
-        super(null,null,null);
-    }
 
     /**
      * Create a new jackalope. A jackalope may be created with age
@@ -74,9 +73,27 @@ public class Jackalope extends Animal
         }
     }
 
-    protected Location findFood() {
-        return null;
-    }
+//    protected Location findFood() {
+//        if (!exceedMaxHealth()) {
+//            Field field = getField();
+//            List<Location> adjacent = field.adjacentLocations(getLocation());
+//            for (Location where : adjacent) {
+//                Object plant = field.getObjectAt(where);
+////            for (Animal prey: data.getAnimalPrey(ANIMAL_NAME)){
+//                if (plant instanceof Hyacinth hyacinth && hyacinth.isAlive()) {
+//                    hyacinth.setDead();
+//                    health += HYACINTH_FOOD_VALUE;
+//                    return where;
+//                } else if (plant instanceof Mandrake mandrake && mandrake.isAlive()) {
+//                    mandrake.setDead();
+//                    health += MANDRAKE_FOOD_VALUE;
+//                    return where;
+//                }
+//            }
+//        }
+//        return null;
+//    }
+
 
     /**
      * Increase the age.
@@ -110,7 +127,7 @@ public class Jackalope extends Animal
                 newAnimals.add(young);
             }
         }
-    }
+   }
 
 
     /**
@@ -125,15 +142,12 @@ public class Jackalope extends Animal
             List<Location> adjacent = field.adjacentLocations(getLocation());
             for (Location where : adjacent) {
                 Object animal = field.getObjectAt(where);
-
-                System.out.println("3");
                 return animal instanceof Jackalope jackalope
                         && jackalope.isAlive()
                         && jackalope.canBreed()
                         && checkOppoGender((jackalope.getGender()));
             }
-        }
-        return true;
+        }return true;
     }
 
 

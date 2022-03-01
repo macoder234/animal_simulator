@@ -119,7 +119,7 @@ public class Griffon extends Animal
      */
     protected Location findFood()
     {
-        if (exceedMaxHealth()) {
+        if (!exceedMaxHealth()) {
             Field field = getField();
             List<Location> adjacent = field.adjacentLocations(getLocation());
             for (Location where : adjacent) {

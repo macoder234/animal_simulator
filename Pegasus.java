@@ -50,22 +50,22 @@ public class Pegasus extends Animal {
      * around. Sometimes it will breed or die of old age.
      * @param newPegasi A list to return newly born pegasi.
      */
-    public void act(List<Animal> newPegasi)
-    {
-        incrementAge();
-        if(isAlive()) {
-            giveBirth(newPegasi);
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+//    public void act(List<Animal> newPegasi, boolean isDay)
+//    {
+//        incrementAge();
+//        if(isAlive()) {
+//            giveBirth(newPegasi);
+//            // Try to move into a free location.
+//            Location newLocation = getField().freeAdjacentLocation(getLocation());
+//            if(newLocation != null) {
+//                setLocation(newLocation);
+//            }
+//            else {
+//                // Overcrowding.
+//                setDead();
+//            }
+//        }
+//    }
 
     /**
      * Increase the age.

@@ -71,7 +71,9 @@ public class Simulator
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Jackalope.class, new Color(150, 75, 0, 255));
+        view.setColor(Hyacinth.class, new Color(0, 150, 2));
+        view.setColor(Mandrake.class, new Color(0, 73, 1));
+        view.setColor(Jackalope.class, new Color(79, 73, 204));
         view.setColor(Werewolf.class, new Color(94, 94, 94, 255));
         view.setColor(Griffon.class, new Color(255,204,0));
         view.setColor(Unicorn.class, new Color(167, 4, 248));
@@ -205,6 +207,16 @@ public class Simulator
                     Location location = new Location(row, col);
                     Unicorn unicorn = new Unicorn(true, field, location, "Unicorn");
                     animals.add(unicorn);
+                }
+                else if(rand.nextDouble() <= MANDRAKE_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Mandrake mandrake = new Mandrake(true , field, location, "Mandrake");
+                    animals.add(mandrake);
+                }
+                else if(rand.nextDouble() <= HYACINTH_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Hyacinth hyacinth = new Hyacinth(true, field, location, "Hyacinth");
+                    animals.add(hyacinth);
                 }
                 // else leave the location empty.
             }
