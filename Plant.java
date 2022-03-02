@@ -22,7 +22,7 @@ public class Plant extends Animal {
      * Create a new plant at a given location
      * @param field The field currently occu
      * @param location The location within the field.
-     * @param animalName The name of the animal
+     * @param plantName The name of the animal
      */
 
     protected Plant(Field field, Location location, String plantName) {
@@ -30,32 +30,46 @@ public class Plant extends Animal {
     }
 
 
-
-
-
+    /**
+     * This is what the plant does most of the time: it gives birth and increases its food value during the day.
+     * In the process, it may die of old age.
+     * @param newPlant A list to return newly born animals.
+     * @param dayOfTime if true, then it is day. if false, then night
+     * @param currentWeather the current weather
+     */
 
 
     public void act(List<Animal> newPlant, boolean dayOfTime, String currentWeather) {
         incrementAge();
-        if (isAlive()) {
+        if (isAlive() ) {
             giveBirth(newPlant);
 
+            // if it is sunny, then the current food value is increased at even faster rate ( 2 times the growth rate).
+
+            if (currentWeather.equals("Sunny") && currentFoodValue < maxTotalFoodValue / growthRate * 2){
+                currentFoodValue = currentFoodValue * growthRate * 2;
+            }
+
             // if it is day, then the current food value is multiplied by the growth rate.
-            if (dayOfTime && currentFoodValue < maxTotalFoodValue / growthRate) {
+            else if (dayOfTime && currentFoodValue < maxTotalFoodValue / growthRate) {
                 currentFoodValue = currentFoodValue * growthRate;
             }
+
+
         }
     }
 
+    //Plants don't need to find food
     @Override
     protected Location findFood() {
-        // Plants don't need to find food.
+
         return null;
     }
 
+    // Done in subclasses.
     @Override
     protected void giveBirth(List<Animal> newPlant) {
-        // Done in subclasses.
+
     }
 
     /**
