@@ -47,63 +47,7 @@ public class Jackalope extends Herbivore
         setAge(randomAge);
 
     }
-    
-    /**
-     * This is what the jackalope does most of the time - it runs 
-     * around. Sometimes it will breed or die of old age.
-     * @param newjackalopes A list to return newly born jackalopes.
-     */
-//    public void act(List<Animal> newjackalopes, boolean dayOfTime)
-//    {
-//        incrementAge();
-//        if(isAlive()) {
-//            giveBirth(newjackalopes);
-//            // Try to move into a free location.
-//            Location newLocation = getField().freeAdjacentLocation(getLocation());
-//            if(newLocation != null) {
-//                setLocation(newLocation);
-//            }
-//            else {
-//                // Overcrowding.
-//                setDead();
-//            }
-//        }
-//    }
 
-//    protected Location findFood() {
-//        if (!exceedMaxHealth()) {
-//            Field field = getField();
-//            List<Location> adjacent = field.adjacentLocations(getLocation());
-//            for (Location where : adjacent) {
-//                Object plant = field.getObjectAt(where);
-////            for (Animal prey: data.getAnimalPrey(ANIMAL_NAME)){
-//                if (plant instanceof Hyacinth hyacinth && hyacinth.isAlive()) {
-//                    hyacinth.setDead();
-//                    health += HYACINTH_FOOD_VALUE;
-//                    return where;
-//                } else if (plant instanceof Mandrake mandrake && mandrake.isAlive()) {
-//                    mandrake.setDead();
-//                    health += MANDRAKE_FOOD_VALUE;
-//                    return where;
-//                }
-//            }
-//        }
-//        return null;
-//    }
-
-
-    /**
-     * Increase the age.
-     * This could result in the jackalope's death.
-     */
-//    private void incrementAge()
-//    {
-//        age++;
-//        if(age > MAX_AGE) {
-//            setDead();
-//         }}
-
-    
     /**
      * Check whether or not this jackalope is to give birth at this step.
      * New births will be made into free adjacent locations.
@@ -144,12 +88,16 @@ public class Jackalope extends Herbivore
                         && jackalope.canBreed()
                         && checkOppoGender((jackalope.getGender()));
             }
-        }return true;
+        }
+        return true;
     }
 
 
-    /*
-    @param animalsGender. If true the animal is a male, if false then female
+    /**
+     * Checks if the gender parameter is opposite to the current animal's
+     * gender.
+     * @param animalsGender The 
+     * @return
      */
     private boolean checkOppoGender(boolean animalsGender) {
         return animalsGender != isMale;
@@ -158,27 +106,6 @@ public class Jackalope extends Herbivore
     private boolean getGender() {
         return isMale;
     }
-//    /**
-//     * Generate a number representing the number of births,
-//     * if it can breed.
-//     * @return The number of births (may be zero).
-//     */
-//    private int breed()
-//    {
-//        int births = 0;
-//        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-//            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-//        }
-//        return births;
-//    }
 
-    /**
-     * A jackalope can breed if it has reached the breeding age.
-     * @return true if the jackalope can breed, false otherwise.
-     */
-//    private boolean canBreed()
-//    {
-//        return age >= BREEDING_AGE;
-//    }
 }
 

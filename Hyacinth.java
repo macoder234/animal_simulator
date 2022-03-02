@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * A simple model of a hyacinth.
  *
- *  @author Saathveekan Satheshkumar, Manik Aggarwal
+ *  @author Saathveekan Satheshkumar and Manik Aggarwal
  *  @version 2022.03.02 (2)
  */
 

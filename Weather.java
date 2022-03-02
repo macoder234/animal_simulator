@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * A model for the weather.
+ *
+ *  @author Saathveekan Satheshkumar and Manik Aggarwal
+ *  @version 2022.03.02 (2)
+ */
 public class Weather {
 
     // The probability for each weather event

@@ -7,9 +7,9 @@ import java.awt.Color;
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing various mythological animals.
- * 
+ *
  * @author Saathveekan Satheshkumar, Manik Aggarwal, David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ *  @version 2022.03.02 (2)
  */
 public class Simulator
 {

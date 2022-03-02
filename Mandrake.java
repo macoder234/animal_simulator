@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * A simple model of a mandrake.
  *
- *  @author Saathveekan Satheshkumar, Manik Aggarwal, David J. Barnes and Michael Kölling
+ *  @author Saathveekan Satheshkumar and Manik Aggarwal
  *  @version 2022.03.02 (2)
  */
 

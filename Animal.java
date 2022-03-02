@@ -2,9 +2,9 @@ import java.util.List;
 import java.util.Random;
 /**
  * A class representing shared characteristics of animals.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ *
+ * @author Saathveekan Satheshkumar, Manik Aggarwal, David J. Barnes and Michael Kölling
+ *  @version 2022.03.02 (2)
  */
 public abstract class Animal
 {
