@@ -47,7 +47,7 @@ public class Unicorn extends Herbivore
     {
         super(field, location, animalName);
         ANIMAL_NAME = animalName;
-        setHealthAndAge(randomAge);
+        setAge(randomAge);
     }
 
     /**

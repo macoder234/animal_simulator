@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Random;
 
 /**
  * A simple model of a jackalope.
@@ -45,7 +44,7 @@ public class Jackalope extends Herbivore
     {
         super(field, location, animalName);
         ANIMAL_NAME = animalName;
-        setHealthAndAge(randomAge);
+        setAge(randomAge);
 
     }
     

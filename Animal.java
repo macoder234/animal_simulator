@@ -21,27 +21,28 @@ public abstract class Animal
 
     // The age at which a fox can start to breed.
     protected int BREEDING_AGE;
+    // The age to which an animal can live.
     protected int MAX_AGE;
+    // The likelihood of an animal breeding.
     protected double BREEDING_PROBABILITY;
+    // The maximum number of births.
     protected int MAX_LITTER_SIZE;
+    //The maximum health of an animal.
     protected int MAX_HEALTH;
-
+    //current age
     protected int age;
-    protected int health;
+    //current health
+    protected int health = rand.nextInt(100);
+    //for animals that have populations of both genders.
     protected Boolean isMale;
     // A shared random number generator to control breeding.
     protected static final Random rand = Randomizer.getRandom();
-    //A shared boolean value to represent day or night.
-    protected static boolean isDay;
 
     /**
      * Create a new animal at location in field.
-     * 
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-
-
     protected Animal(Field field, Location location, String animalName)
     {
 
@@ -49,12 +50,16 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
-        fillAnimalData();
+        fillAnimalFields();
         assignGender();
-  //      isDay = true;
+
     }
 
-    private void fillAnimalData()
+    /**
+     * Fill in the fields of animal from data in the AnimalData class
+     *
+     */
+    private void fillAnimalFields()
     {
         BREEDING_AGE = data.getBreedingAge(nameOfAnimal);
         MAX_AGE = data.getMaxAge(nameOfAnimal);
@@ -63,8 +68,8 @@ public abstract class Animal
     }
 
     /**
-     * This is what the werewolf does most of the time: it hunts for
-     * rabbits. In the process, it might breed, die of hunger,
+     * This is what the animal does most of the time: it hunts for
+     * food. In the process, it might breed, die of hunger,
      * or die of old age.
      //     * @param field The field currently occupied.
      * @param newAnimals A list to return newly born animals.
@@ -89,18 +94,27 @@ public abstract class Animal
                     // Overcrowding.
                     setDead();
                 }
-//                System.out.println("day");
             }
         }
-        //70 percent of the animals die.
+        //Hurricane weather gets rid of 70 percent of the population
         if (currentWeather.equals("Hurricane") && rand.nextDouble() <= 0.7) {
             System.out.println("Weather: hurricane");
             setDead();
         }
     }
 
+    /**
+     * Look for prey adjacent to the current location.
+     * Only the first live prey is eaten.
+     * @return Where food was found, or null if it wasn't.
+     */
     protected abstract Location findFood();
 
+    /**
+     * Check whether or not this animal is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newAnimals A list to return newly born aninmals.
+     */
     protected abstract void giveBirth(List<Animal> newAnimals);
 
     /**
@@ -204,7 +218,8 @@ public abstract class Animal
 
 
     /**
-     *Check if species has 2 different genders, if so, assign a random gender to each animal
+     *Check if species has 2 different genders.
+     *  If so, assign a random gender to each animal of that species.
      */
     protected void assignGender(){
         if (data.getOppoGenderRequired(nameOfAnimal))
@@ -216,25 +231,27 @@ public abstract class Animal
         }
     }
 
+    /**
+     *
+     * @return boolean value for whether animal has exceeded max health
+     */
     protected boolean exceedMaxHealth() {
         // Max health for animal is a multiple of the average of prey food value.
         MAX_HEALTH = data.getAverageOfPreyValue(nameOfAnimal) * 2;
         return MAX_HEALTH < health;
     }
 
-
-    protected void setHealthAndAge(boolean randomAge) {
-        int average = data.getAverageOfPreyValue(nameOfAnimal);
+    /**
+     * Sets age for the newborns
+     * @param if true, the age is set to random
+     */
+    protected void setAge(boolean randomAge) {
+        age = 0;
         if (randomAge) {
             age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(100) ;
-        }
-        else {
-            age = 0;
-//           health = average;
-            health = rand.nextInt(100);
         }
     }
+
 
 }
 

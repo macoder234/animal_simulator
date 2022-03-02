@@ -1,27 +1,32 @@
 import java.util.List;
 
+/**
+ * Lays out the basic functions for a plant.
+ *
+ *  @author Saathveekan Satheshkumar, Manik Aggarwale
+ *  @version 2022.03.02 (2)
+ */
+
+
+
 public class Plant extends Animal {
 
-    //if not double, change to int
+    //a growth multiplier
     protected double growthRate;
     //the current food value of the plant due to the growth rate
     protected double currentFoodValue;
+    // the max food value for a plant
+    protected int maxTotalFoodValue = 50;
 
-    protected static int maxTotalFoodValue;
-
+    /**
+     * Create a new plant at a given location
+     * @param field The field currently occupied
+     *
+     */
 
     protected Plant(Field field, Location location, String plantName) {
         super(field, location, plantName);
-        maxTotalFoodValue = 50;
     }
-
-    protected void setAge(boolean randomAge) {
-        age = 0;
-        if (randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
-    }
-
 
     public void act(List<Animal> newPlant, boolean dayOfTime, String currentWeather) {
         incrementAge();
@@ -32,33 +37,23 @@ public class Plant extends Animal {
             if (dayOfTime && currentFoodValue < maxTotalFoodValue / growthRate) {
                 currentFoodValue = currentFoodValue * growthRate;
             }
-//            // Move towards a source of food if found.
-//            Location newLocation = findFood();
-//            if (newLocation == null) {
-//                // No food found - try to move to a free location.
-//                newLocation = getField().freeAdjacentLocation(getLocation());
-//            }
-//            // See if it was possible to move.
-//            if (newLocation != null) {
-//                setLocation(newLocation);
-//            }
-//            else {
-//                // Overcrowding.
-//                setDead();
-//            }
-//                System.out.println("day");
         }
     }
 
     @Override
     protected Location findFood() {
+        // Plants don't need to find food.
         return null;
     }
 
     @Override
     protected void giveBirth(List<Animal> newPlant) {
+        // Done in subclasses.
     }
 
+    /**
+     * @return returns the current food value.
+     */
     protected double getCurrentFoodValue() {
         return currentFoodValue;
     }

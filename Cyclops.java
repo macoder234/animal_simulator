@@ -42,7 +42,7 @@ public class Cyclops extends Animal
         super(field, location,animalName);
         ANIMAL_NAME = animalName;
         int average = data.getAverageOfPreyValue(ANIMAL_NAME);
-        setHealthAndAge(randomAge);
+        setAge(randomAge);
     }
 
     /**

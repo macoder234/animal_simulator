@@ -2,14 +2,13 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.HashSet;
 import java.awt.Color;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field
  * containing various mythological animals.
  * 
- * @author Manik Aggarwal, Saathveekan Satheshkumar, David J. Barnes and Michael Kölling
+ * @author Saathveekan Satheshkumar, Manik Aggarwal, David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
 public class Simulator
@@ -19,9 +18,9 @@ public class Simulator
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
+    // The probability that a werewolf will be created in any given grid position.
     private static final double WEREWOLF_CREATION_PROBABILITY = 0.03;
-    // The probability that a rabbit will be created in any given grid position.
+    // The probability that a jackalope will be created in any given grid position.
     private static final double JACKALOPE_CREATION_PROBABILITY = 0.2;
     // The probability that a griffon will be created in any given grid position.
     private static final double GRIFFON_CREATION_PROBABILITY = 0.03;
@@ -41,12 +40,15 @@ public class Simulator
     private List<Animal> animals;
     // The current state of the field.
     private Field field;
+    // The current time of day.
     private boolean isDay;
+    //The current weather event.
     private String currentWeather;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    // Simulates the weather.
     private Weather weather = new Weather();
 
     /**
@@ -89,36 +91,12 @@ public class Simulator
         reset();
     }
 
-//    public void fillAnimalData() {
-//        // Fills in data for all the animals
-//        data = new AnimalData();
-//
-//        HashSet<String> werewolfPrey = new HashSet<>();
-//        werewolfPrey.add("Jackalope");
-//        werewolfPrey.add("Unicorn");
-//
-//        HashSet<String> griffonPrey = new HashSet<>();
-//        griffonPrey.add("Jackalope");
-//        griffonPrey.add("Pegasus");
-//
-//        HashSet<String> cyclopsPrey = new HashSet<>();
-//        cyclopsPrey.add("Werewolf");
-//        cyclopsPrey.add("Griffon");
-//
-//        data.fillAnimalData("Jackalope", 5, 40, 0.12, 4, 9, null, );
-//        data.fillAnimalData("Unicorn", 5,40,0.12,2,14,null);
-//        data.fillAnimalData("Pegasus", 5, 40, 0.12, 4, 9, null);
-//        data.fillAnimalData("Werewolf",15, 150, 0.08, 2, 15, null);
-//        data.fillAnimalData("Griffon", 5, 40, 0.12, 4, 9, null);
-//        data.fillAnimalData("Cyclops", 5, 40, 0.12, 4, 9, null);
-//    }
-    
     /**
      * Run the simulation from its current state for a reasonably long period,
      * (4000 steps).
      */
     public void runLongSimulation(){
-        simulate(10000);
+        simulate(4000);
     }
     
     /**
@@ -130,24 +108,28 @@ public class Simulator
     {
         for(int tally = 1; tally <= numSteps && view.isViable(field); tally++) {
             simulateOneStep();
-            delay(3000);   // uncomment this to run m
+            delay(1);   // uncomment this to run m
         }
     }
     
     /**
      * Run the simulation from its current state for a single step.
      * Iterate over the whole field updating the state of each
-     * fox and rabbit.
+     * animal.
      */
     public void simulateOneStep()
     {
         step++;
-        changeisDay();
-        currentWeather = weather.getNewWeather();
+        // Changes the time of day.
+        changesDay();
+        // Updates the time of day for the weather class.
+        weather.timeOfDay(isDay);
+        // Sets a new weather for each step.
+        currentWeather = weather.setWeather();
 
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
-        // Let all rabbits act.
+        // Let all animals act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
             animal.act(newAnimals, isDay, currentWeather);
@@ -156,7 +138,7 @@ public class Simulator
             }
         }
 
-        // Add the newly born foxes and rabbits to the main lists.
+        // Add the newly born animals to the main lists.
         animals.addAll(newAnimals);
 
         view.showStatus(currentWeather, step, field, isDayOrNight());
@@ -245,18 +227,19 @@ public class Simulator
         }
     }
 
-    protected void changeisDay(){
+    /**
+     * Changes the time of day.
+     */
+    protected void changesDay(){
         isDay = !isDay;
 
     }
 
-
-    public static void main(String[] args) {
-        Simulator sim = new Simulator();
-        sim.runLongSimulation();
-
-    }
-
+    /**
+     * For the GUI, returns the corresponding time of day as a
+     * String type.
+     * @return the time of day as a String type.
+     */
     private String isDayOrNight()
     {
         if (isDay) {
@@ -266,4 +249,11 @@ public class Simulator
             return "Night";
         }
     }
+
+    public static void main(String[] args) {
+        Simulator sim = new Simulator();
+        sim.runLongSimulation();
+
+    }
+
 }

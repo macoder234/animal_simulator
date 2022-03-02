@@ -47,7 +47,7 @@ public class Werewolf extends Animal
 
         super(field, location,animalName);
         ANIMAL_NAME = animalName;
-        setHealthAndAge(randomAge);
+        setAge(randomAge);
     }
     
     /**

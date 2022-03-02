@@ -46,14 +46,7 @@ public class Griffon extends Animal
         super(field, location, animalName);
         ANIMAL_NAME = animalName;
         int average = data.getAverageOfPreyValue(ANIMAL_NAME);
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(average);
-        }
-        else {
-            age = 0;
-            health = average;
-        }
+        setAge(randomAge);
     }
 
     /**
