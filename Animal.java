@@ -15,25 +15,23 @@ public abstract class Animal
     // The animal's position in the field.
     private Location location;
 
-    private String nameOfAnimal;
-
     protected AnimalData data = new AnimalData();
 
-    // The age at which a fox can start to breed.
+    // The name of the animal.
+    private String nameOfAnimal;
+    // The age at which an animal can start to breed.
     protected int BREEDING_AGE;
-    // The age to which an animal can live.
+    // The maximum age to which an animal can live.
     protected int MAX_AGE;
     // The likelihood of an animal breeding.
     protected double BREEDING_PROBABILITY;
     // The maximum number of births.
     protected int MAX_LITTER_SIZE;
-    //The maximum health of an animal.
-    protected int MAX_HEALTH;
-    //current age
+    // Current age.
     protected int age;
-    //current health
+    // Current health.
     protected int health = rand.nextInt(100);
-    //for animals that have populations of both genders.
+    // For animals that have populations of both genders.
     protected Boolean isMale;
     // A shared random number generator to control breeding.
     protected static final Random rand = Randomizer.getRandom();
@@ -58,7 +56,6 @@ public abstract class Animal
 
     /**
      * Fill in the fields of animal from data in the AnimalData class
-     *
      */
     private void fillAnimalFields()
     {
@@ -105,24 +102,14 @@ public abstract class Animal
     }
 
     /**
-     * Look for prey adjacent to the current location.
-     * Only the first live prey is eaten.
-     * @return Where food was found, or null if it wasn't.
+     * Done in subclasses
      */
     protected abstract Location findFood();
 
     /**
-     * Check whether or not this animal is to give birth at this step.
-     * New births will be made into free adjacent locations.
-     * @param newAnimals A list to return newly born aninmals.
+     *Done in subclasses
      */
     protected abstract void giveBirth(List<Animal> newAnimals);
-
-    /**
-     * Make this animal act - that is: make it do
-     * whatever it wants/needs to do.
-     * @param newAnimals A list to receive newly born animals.
-     */
 
     /**
      * Check whether the animal is alive or not.
@@ -234,17 +221,17 @@ public abstract class Animal
 
     /**
      *
-     * @return boolean value for whether animal has exceeded max health
+     * @return true if health is below threshold health
      */
-    protected boolean exceedMaxHealth() {
-        // Max health for animal is a multiple of the average of prey food value.
-        MAX_HEALTH = data.getAverageOfPreyValue(nameOfAnimal) * 2;
-        return MAX_HEALTH < health;
+    protected boolean belowMaxHealth() {
+        // Threshold health for animal is a multiple of the average of prey food value.
+        int thresholdHealth = data.getAverageOfPreyValue(nameOfAnimal) * 2;
+        return thresholdHealth > health;
     }
 
     /**
      * Sets age for the newborns
-     * @param if true, the age is set to random
+     * @param randomAge true, the age is set to random
      */
     protected void setAge(boolean randomAge) {
         age = 0;

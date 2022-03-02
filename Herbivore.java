@@ -10,7 +10,8 @@ import java.util.List;
 public class Herbivore extends Animal {
 
     /**
-     * Sends all animals information to the superclass.
+     * Create a new herbivore at a given location.
+     *
      * @param field The animal's field.
      * @param location The location with the field.
      * @param animalName The name of the animal
@@ -26,7 +27,7 @@ public class Herbivore extends Animal {
     @Override
     protected Location findFood() {
         // Checks to see if max health has been reached.
-        if (!exceedMaxHealth()) {
+        if (belowMaxHealth()) {
             Field field = getField();
             List<Location> adjacent = field.adjacentLocations(getLocation());
             for (Location where : adjacent) {
@@ -45,6 +46,10 @@ public class Herbivore extends Animal {
         return null;
     }
 
+
+    /**
+     * Done in subclasses
+     */
     @Override
     protected void giveBirth (List < Animal > newAnimals) {
     }
