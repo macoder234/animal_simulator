@@ -106,7 +106,7 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int tally = 1; tally <= numSteps && view.isViable(field); tally++) {
             simulateOneStep();
-            delay(1);   // uncomment this to run m
+            delay(100);   // uncomment this to run m
         }
     }
 

@@ -104,6 +104,8 @@ public class SimulatorView extends JFrame
     /**
      * Show the current status of the field.
      * @param step Which iteration step it is.
+     * @param timeOfDay true if currently day
+     * @param weather the current weather
      * @param field The field whose status is to be displayed.
      */
     public void showStatus(String weather, int step, Field field, String timeOfDay)
@@ -113,7 +115,6 @@ public class SimulatorView extends JFrame
         }
         stepLabel.setText(STEP_PREFIX + step + "       " +
                 TIMEOFDAY_PREFIX + timeOfDay + "       " + WEATHER_PREFIX + weather);
-//        weatherLabel.setText(WEATHER_PREFIX + weather);
 
         stats.reset();
         

@@ -17,6 +17,7 @@ public class AnimalData {
     private HashMap<String, Integer> maxLitterSize = new HashMap<>();
     private HashMap<String, Integer> foodValue = new HashMap<>();
     private HashMap<String, Boolean> oppoGenderRequired = new HashMap<>();
+    private HashMap<String, Boolean> isNocturnal = new HashMap<>();
     private HashMap<String, HashSet<String>> prey = new HashMap<>();
 
 
@@ -50,14 +51,14 @@ public class AnimalData {
         pegasusPrey.add("Mandrake");
 
 
-        fillAnimalData("Jackalope", 7, 100, 0., 5, 4, jackalopePrey, true);
-        fillAnimalData("Unicorn", 7, 100, 0.1, 3, 12, unicornPrey, false);
-        fillAnimalData("Pegasus", 7, 100, 0.1, 3, 12, pegasusPrey, true);
-        fillAnimalData("Werewolf", 9, 70, 0.03, 2, 20, werewolfPrey, false);
-        fillAnimalData("Griffon", 9, 80, 0.06, 2, 20, griffonPrey, false);
-        fillAnimalData("Cyclops", 10, 80, 0.06, 3, 50, cyclopsPrey, false);
-        fillAnimalData("Mandrake", 0, 60, 0.01, 4, 3, null, false);
-        fillAnimalData("Hyacinth", 0, 60, 0.01, 4, 3, null, false);
+        fillAnimalData("Jackalope", 7, 100, 0., 5, 4, jackalopePrey, true, false);
+        fillAnimalData("Unicorn", 7, 100, 0.1, 3, 12, unicornPrey, false, false);
+        fillAnimalData("Pegasus", 7, 100, 0.1, 3, 12, pegasusPrey, true, false);
+        fillAnimalData("Werewolf", 9, 70, 0.03, 2, 20, werewolfPrey, false, true);
+        fillAnimalData("Griffon", 9, 80, 0.06, 2, 20, griffonPrey, false, true);
+        fillAnimalData("Cyclops", 10, 80, 0.06, 3, 50, cyclopsPrey, false, false);
+        fillAnimalData("Mandrake", 0, 60, 0.01, 4, 3, null, false, false);
+        fillAnimalData("Hyacinth", 0, 60, 0.01, 4, 3, null, false, false);
     }
 
     /**
@@ -70,8 +71,9 @@ public class AnimalData {
      * @param foodValue The food value.
      * @param prey A list of all the prey that the animal can eat.
      * @param oppGenderRequired If the animal requires the opposite gender to reproduce.
+     * @param isNocturnal If whether the animal is nocturnal or not
      */
-    public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey, boolean oppGenderRequired) {
+    public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey, boolean oppGenderRequired, boolean isNocturnal) {
         this.listOfAnimal.add(animalName);
         this.breedingAge.put(animalName, breedingAge);
         this.maxAge.put(animalName, maxAge);
@@ -80,7 +82,7 @@ public class AnimalData {
         this.foodValue.put(animalName, foodValue);
         this.prey.put(animalName, prey);
         this.oppoGenderRequired.put(animalName, oppGenderRequired);
-
+        this.isNocturnal.put(animalName, isNocturnal);
     }
 
 
@@ -183,5 +185,13 @@ public class AnimalData {
         return oppoGenderRequired.get(animalName);
     }
 
+    /**
+     * Gets whether the animal is nocturnal or not.
+     * @param nameOfAnimal name of animal.
+     * @return whether it is nocturnal or not.
+     */
+    public boolean getIsNocturnal(String nameOfAnimal) {
+        return isNocturnal.get(nameOfAnimal);
+    }
 
 }

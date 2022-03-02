@@ -11,7 +11,7 @@ public class Weather {
     // The probability for each weather event
     private double SUNNY_PROBABILITY = 0.4;
     private double RAINY_PROBABILITY = 0.4;
-    private double HURRICANE_PROBABILITY = 0.001;
+    private double HURRICANE_PROBABILITY = 0.01;
 
     // True if there is daylight.
     private boolean isDay;

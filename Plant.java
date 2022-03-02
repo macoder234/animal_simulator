@@ -50,6 +50,11 @@ public class Plant extends Animal {
             if (currentWeather.equals("Sunny") && currentFoodValue < maxTotalFoodValue / growthRate * 2) {
                 currentFoodValue = currentFoodValue * growthRate * 2;
             }
+            //If it is rainy, then the current food value is increased at an even faster rate (1.5 times the growth rate).
+            else if (currentWeather.equals("Rainy") && currentFoodValue < maxTotalFoodValue / growthRate * 1.5) {
+                currentFoodValue = currentFoodValue * growthRate * 1.5;
+            }
+
 
             // if it is day, then the current food value is multiplied by the growth rate.
             else if (dayOfTime && currentFoodValue < maxTotalFoodValue / growthRate) {

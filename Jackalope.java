@@ -15,7 +15,7 @@ public class Jackalope extends Herbivore
 
     /**
      * Create a new jackalope. A jackalope may be created with age
-     * zero (a new born) or with a random age.
+     * zero (a newborn) or with a random age.
      *
      * @param randomAge If true, the pegasus will have a random age.
      * @param field The field currently occupied.

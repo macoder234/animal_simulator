@@ -74,7 +74,7 @@ public abstract class Animal
      */
     public void act(List<Animal> newAnimals, boolean dayOfTime, String currentWeather){
 
-        if (dayOfTime) {
+        if (dayOfTime && !data.getIsNocturnal(nameOfAnimal)) {
             incrementAge();
             incrementHunger();
             if (isAlive()) {
@@ -94,7 +94,27 @@ public abstract class Animal
                 }
             }
         }
-        //Hurricane weather gets rid of 70 percent of the population
+        else if (!dayOfTime && data.getIsNocturnal(nameOfAnimal)) {
+            incrementAge();
+            incrementHunger();
+            if (isAlive()) {
+                giveBirth(newAnimals);
+                // Move towards a source of food if found.
+                Location newLocation = findFood();
+                if (newLocation == null) {
+                    // No food found - try to move to a free location.
+                    newLocation = getField().freeAdjacentLocation(getLocation());
+                }
+                // See if it was possible to move.
+                if (newLocation != null) {
+                    setLocation(newLocation);
+                } else {
+                    // Overcrowding.
+                    setDead();
+                }
+            }
+        }
+        // There is a 70 percent change that if there is a hurricane weather gets rid of a percentage of the population.
         if (currentWeather.equals("Hurricane") && rand.nextDouble() <= 0.7) {
             System.out.println("Weather: hurricane");
             setDead();
@@ -167,13 +187,13 @@ public abstract class Animal
         }
     }
 
-    protected void incrementHunger()
-    {
+    protected void incrementHunger() {
         health--;
-        if(health <= 0) {
+        if (health <= 0) {
             setDead();
         }
     }
+
     /**
      * Return the animal's location.
      * @return The animal's location.
@@ -182,6 +202,7 @@ public abstract class Animal
     {
         return location;
     }
+
     
     /**
      * Place the animal at the new location in the given field.
