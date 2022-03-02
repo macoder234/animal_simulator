@@ -28,17 +28,31 @@ public class AnimalData {
         cyclopsPrey.add("Werewolf");
         cyclopsPrey.add("Griffon");
 
-//        HashSet<Animal> werewolfAnimalPrey = new HashSet<>();
-//        Jackalope jackalope = new Jackalope();
-//        werewolfAnimalPrey.add(jackalope);
+
+        HashSet<String> jackalopePrey = new HashSet<>();
+        jackalopePrey.add("Hyacinth");
+        jackalopePrey.add("Mandrake");
+
+        HashSet<String> unicornPrey = new HashSet<>();
+        unicornPrey.add("Hyacinth");
+        unicornPrey.add("Mandrake");
+
+        HashSet<String> pegasusPrey = new HashSet<>();
+        pegasusPrey.add("Hyacinth");
+        pegasusPrey.add("Mandrake");
 
 
-        fillAnimalData("Jackalope", 5, 40, 1.0, 4, 9, null, true);
-        fillAnimalData("Unicorn", 8, 100, 0.04, 2, 14, null, false);
-        fillAnimalData("Pegasus", 9, 90, 0.06, 4, 9, null, true);
-        fillAnimalData("Werewolf", 7, 70, 0.08, 2, 15, werewolfPrey, false);
-        fillAnimalData("Griffon", 9, 80, 0.09, 4, 9, griffonPrey, false);
-        fillAnimalData("Cyclops", 7, 80, 0.09, 4, 9, cyclopsPrey, false);
+
+
+
+        fillAnimalData("Jackalope", 7, 100, 0., 5, 4, jackalopePrey, true);
+        fillAnimalData("Unicorn", 7, 100, 0.1, 3, 12, unicornPrey, false);
+        fillAnimalData("Pegasus", 7, 100, 0.1, 3, 12, pegasusPrey, true);
+        fillAnimalData("Werewolf", 9, 70, 0.06, 2, 20, werewolfPrey, false);
+        fillAnimalData("Griffon", 9, 80, 0.06, 2, 20, griffonPrey, false);
+        fillAnimalData("Cyclops", 10, 80, 0.03, 3, 50, cyclopsPrey, false);
+        fillAnimalData("Mandrake",0, 60, 0.01, 4, 3, null, false);
+        fillAnimalData("Hyacinth", 0, 60, 0.01, 4, 3, null, false);
     }
 
     public void fillAnimalData(String animalName, int breedingAge, int maxAge, double breedingProbability, int maxLitterSize, int foodValue, HashSet<String> prey, boolean oppGenderRequired) {
@@ -53,6 +67,9 @@ public class AnimalData {
 
     }
 
+//    public HashSet<Animal> getAnimalPrey(String nameOfAnimal){
+//        return animalPreyMap.get(nameOfAnimal);
+//    }
 
     /**
      * Return breeding age
@@ -111,6 +128,10 @@ return breedingProbability.get(nameOfAnimal);
         return getPreyValueTotal(a) / getNumberOfPrey(a);
     }
 
+
+    public Boolean getOppoGenderRequired(String animalName){
+        return oppoGenderRequired.get(animalName);
+    }
 
 
 }

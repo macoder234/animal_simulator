@@ -6,7 +6,7 @@ public class Cyclops extends Animal
 
     private AnimalData data = new AnimalData();
     // Characteristics shared by all foxes (class variables).
-    private static String ANIMAL_NAME = "Cyclops";
+    private static String ANIMAL_NAME;
     // The age at which a fox can start to breed.
 //    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
 //    // The age to which a fox can live.
@@ -17,17 +17,17 @@ public class Cyclops extends Animal
 //    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
+    private final int WEREWOLF_FOOD_VALUE = data.getFoodValue("Werewolf");
     // The food value of a single pegasus. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private final int PEGASUS_FOOD_VALUE = data.getFoodValue("Pegasus");
+    private final int GRIFFON_FOOD_VALUE = data.getFoodValue("Griffon");
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     // Individual characteristics (instance fields).
     // The fox's age.
-    private int age;
+//    private int age;
     // The fox's food level, which is increased by eating rabbits.
-    private int health;
+//    private int health;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero
@@ -41,14 +41,8 @@ public class Cyclops extends Animal
 
         super(field, location,animalName);
         ANIMAL_NAME = animalName;
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(JACKALOPE_FOOD_VALUE);
-        }
-        else {
-            age = 0;
-            health = JACKALOPE_FOOD_VALUE;
-        }
+        int average = data.getAverageOfPreyValue(ANIMAL_NAME);
+        setHealthAndAge(randomAge);
     }
 
     /**
@@ -56,7 +50,7 @@ public class Cyclops extends Animal
      * rabbits. In the process, it might breed, die of hunger,
      * or die of old age.
      //     * @param field The field currently occupied.
-     * @param newCyclopes A list to return newly born foxes.
+     * @param newAnimals A list to return newly born foxes.
      */
 //    public void act(List<Animal> newAnimals)
 //    {
@@ -95,13 +89,13 @@ public class Cyclops extends Animal
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
-    private void incrementHunger()
-    {
-        health--;
-        if(health <= 0) {
-            setDead();
-        }
-    }
+//    private void incrementHunger()
+//    {
+//        health--;
+//        if(health <= 0) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Look for rabbits adjacent to the current location.
@@ -110,14 +104,20 @@ public class Cyclops extends Animal
      */
     protected Location findFood()
     {
-        Field field = getField();
-        List<Location> adjacent = field.adjacentLocations(getLocation());
-        for (Location where : adjacent) {
-            Object animal = field.getObjectAt(where);
-            if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
-                jackalope.setDead();
-                health = JACKALOPE_FOOD_VALUE;
-                return where;
+        if (!exceedMaxHealth()) {
+            Field field = getField();
+            List<Location> adjacent = field.adjacentLocations(getLocation());
+            for (Location where : adjacent) {
+                Object animal = field.getObjectAt(where);
+                if (animal instanceof Werewolf werewolf && werewolf.isAlive()) {
+                    werewolf.setDead();
+                    health += WEREWOLF_FOOD_VALUE;
+                    return where;
+                } else if (animal instanceof Griffon griffon && griffon.isAlive()) {
+                    griffon.setDead();
+                    health += GRIFFON_FOOD_VALUE;
+                    return where;
+                }
             }
         }
         return null;
@@ -137,32 +137,32 @@ public class Cyclops extends Animal
         int births = breed();
         for(int b = 0; b < births && !free.isEmpty(); b++) {
             Location loc = free.remove(0);
-            Cyclops young = new Cyclops(false, field, loc);
-            newCyclopes.add(young);
+            Cyclops young = new Cyclops(false, field, loc, ANIMAL_NAME);
+            newAnimals.add(young);
         }
     }
 
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
+//    /**
+//     * Generate a number representing the number of births,
+//     * if it can breed.
+//     * @return The number of births (may be zero).
+//     */
+//    private int breed()
+//    {
+//        int births = 0;
+//        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+//            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+//        }
+//        return births;
+//    }
 
     /**
      * A fox can breed if it has reached the breeding age.
      */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+//    private boolean canBreed()
+//    {
+//        return age >= BREEDING_AGE;
+//    }
 
 }
 

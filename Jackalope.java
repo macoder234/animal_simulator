@@ -8,10 +8,10 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Jackalope extends Animal
+public class Jackalope extends Herbivore
 {
 
-    private AnimalData data = new AnimalData();
+  //  private AnimalData data = new AnimalData();
     // Characteristics shared by all jackalopes (class variables).
     private static String ANIMAL_NAME;
     // The age at which a jackalope can start to breed.
@@ -45,10 +45,8 @@ public class Jackalope extends Animal
     {
         super(field, location, animalName);
         ANIMAL_NAME = animalName;
-        age = 0;
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
+        setHealthAndAge(randomAge);
+
     }
     
     /**
@@ -56,22 +54,22 @@ public class Jackalope extends Animal
      * around. Sometimes it will breed or die of old age.
      * @param newjackalopes A list to return newly born jackalopes.
      */
-    public void act(List<Animal> newjackalopes)
-    {
-        incrementAge();
-        if(isAlive()) {
-            giveBirth(newjackalopes);
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+//    public void act(List<Animal> newjackalopes, boolean dayOfTime)
+//    {
+//        incrementAge();
+//        if(isAlive()) {
+//            giveBirth(newjackalopes);
+//            // Try to move into a free location.
+//            Location newLocation = getField().freeAdjacentLocation(getLocation());
+//            if(newLocation != null) {
+//                setLocation(newLocation);
+//            }
+//            else {
+//                // Overcrowding.
+//                setDead();
+//            }
+//        }
+//    }
 
 //    protected Location findFood() {
 //        if (!exceedMaxHealth()) {
@@ -110,7 +108,7 @@ public class Jackalope extends Animal
     /**
      * Check whether or not this jackalope is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newjackalopes A list to return newly born jackalopes.
+     * @param newAnimals A list to return newly born jackalopes.
      */
     protected void giveBirth(List<Animal> newAnimals)
     {
@@ -184,3 +182,4 @@ public class Jackalope extends Animal
 //        return age >= BREEDING_AGE;
 //    }
 }
+

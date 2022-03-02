@@ -8,17 +8,17 @@ public class Griffon extends Animal
     // The name of the animal.
     private static String ANIMAL_NAME;
     //
-    private AnimalData data = new AnimalData();
-    // The age at which a fox can start to breed.
-    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
-    // The age to which a fox can live.
-    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
-    // The likelihood of a fox breeding.
-    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
-    // The maximum number of births.
-    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
-    // The food value of a single jackalope. In effect, this is the
-    // number of steps a werewolf can go before it has to eat again.
+//    private AnimalData data = new AnimalData();
+//    // The age at which a fox can start to breed.
+//    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+//    // The age to which a fox can live.
+//    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+//    // The likelihood of a fox breeding.
+//    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
+//    // The maximum number of births.
+//    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+//    // The food value of a single jackalope. In effect, this is the
+//    // number of steps a werewolf can go before it has to eat again.
     private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
     // The food value of a single pegasus. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
@@ -29,9 +29,9 @@ public class Griffon extends Animal
 
     // Individual characteristics (instance fields).
     // The fox's age.
-    private int age;
+   // private int age;
     // The fox's health level, which is increased by eating prey.
-    private int health;
+    // private int health;
 
     /**
      * Create a fox. A fox can be created as a new born (age zero
@@ -100,13 +100,13 @@ public class Griffon extends Animal
     /**
      * Make this fox more hungry. This could result in the fox's death.
      */
-    private void incrementHunger()
-    {
-        health--;
-        if(health <= 0) {
-            setDead();
-        }
-    }
+//    private void incrementHunger()
+//    {
+//        health--;
+//        if(health <= 0) {
+//            setDead();
+//        }
+//    }
 
     /**
      * Look for prey adjacent to the current location.
@@ -129,7 +129,8 @@ public class Griffon extends Animal
                     jackalope.setDead();
                     health += JACKALOPE_FOOD_VALUE;
                     return where;
-                } else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
+                }
+                else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
                     pegasus.setDead();
                     health += PEGASUS_FOOD_VALUE;
                     return where;
@@ -145,7 +146,7 @@ public class Griffon extends Animal
     /**
      * Check whether or not this fox is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newGriffons A list to return newly born foxes.
+     * @param newAnimals A list to return newly born foxes.
      */
     protected void giveBirth(List<Animal> newAnimals)
     {
@@ -178,8 +179,8 @@ public class Griffon extends Animal
     /**
      * A fox can breed if it has reached the breeding age.
      */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+//    private boolean canBreed()
+//    {
+//        return age >= BREEDING_AGE;
+//    }
 }

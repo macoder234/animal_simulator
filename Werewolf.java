@@ -12,11 +12,9 @@ public class Werewolf extends Animal
 {
     // Characteristics shared by all werewolves (class variables).
 
-    private static String ANIMAL_NAME = "Werewolf";
+    private static String ANIMAL_NAME;
     //
-    private AnimalData data = new AnimalData();
-    // The age at which a fox can start to breed.
-    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+
     // The age to which a fox can live.
 //    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
     // The likelihood of a werewolf breeding.
@@ -49,15 +47,7 @@ public class Werewolf extends Animal
 
         super(field, location,animalName);
         ANIMAL_NAME = animalName;
-        int average = data.getAverageOfPreyValue(ANIMAL_NAME);
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-            health = rand.nextInt(average);
-        }
-        else {
-            age = 0;
-            health = average;
-        }
+        setHealthAndAge(randomAge);
     }
     
     /**
@@ -101,16 +91,16 @@ public class Werewolf extends Animal
 //        }
 //    }
     
-    /**
-     * Make this werewolf more hungry. This could result in the werewolf's death.
-     */
-    private void incrementHunger()
-    {
-        health--;
-        if(health <= 0) {
-            setDead();
-        }
-    }
+//    /**
+//     * Make this werewolf more hungry. This could result in the werewolf's death.
+//     */
+//    private void incrementHunger()
+//    {
+//        health--;
+//        if(health <= 0) {
+//            setDead();
+//        }
+//    }
     
     /**
      * Look for rabbits adjacent to the current location.
@@ -119,7 +109,7 @@ public class Werewolf extends Animal
      */
     protected Location findFood()
     {
-        if (exceedMaxHealth()) {
+        if (!exceedMaxHealth()) {
             Field field = getField();
             List<Location> adjacent = field.adjacentLocations(getLocation());
             for (Location where : adjacent) {
@@ -141,11 +131,10 @@ public class Werewolf extends Animal
         }
         return null;
     }
-    
     /**
      * Check whether or not this werewolf is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newWerewolves A list to return newly born werewolves.
+     * @param newAnimals A list to return newly born werewolves.
      */
     protected void giveBirth(List<Animal> newAnimals)
     {

@@ -20,18 +20,21 @@ public class Simulator
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
     // The probability that a fox will be created in any given grid position.
-    private static final double WEREWOLF_CREATION_PROBABILITY = 0.02;
+    private static final double WEREWOLF_CREATION_PROBABILITY = 0.03;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double JACKALOPE_CREATION_PROBABILITY = 0.5;
-    // The probability that a rabbit will be created in any given grid position.
-    private static final double GRIFFON_CREATION_PROBABILITY = 0.01;
+    private static final double JACKALOPE_CREATION_PROBABILITY = 0.2;
     // The probability that a griffon will be created in any given grid position.
-    private static final double PEGASUS_CREATION_PROBABILITY = 0.004;
+    private static final double GRIFFON_CREATION_PROBABILITY = 0.03;
     // The probability that a pegasus will be created in any given grid position.
-    private static final double UNICORN_CREATION_PROBABILITY = 0.004;
+    private static final double PEGASUS_CREATION_PROBABILITY = 0.08;
     // The probability that a unicorn will be created in any given grid position.
-    private static final double CYCLOPS_CREATION_PROBABILITY = 0.004;
+    private static final double UNICORN_CREATION_PROBABILITY = 0.05;
     // The probability that a cyclops will be created in any given grid position.
+    private static final double CYCLOPS_CREATION_PROBABILITY = 0.03;
+    // The probability that a mandrake will be created in any given grid position.
+    private static final double MANDRAKE_CREATION_PROBABILITY = 0.3;
+    // The probability that a hyacinth will be created in any given grid position.
+    private static final double HYACINTH_CREATION_PROBABILITY = 0.3;
 
 
     // List of animals in the field.
@@ -113,7 +116,7 @@ public class Simulator
      * (4000 steps).
      */
     public void runLongSimulation(){
-        simulate(4000);
+        simulate(5000);
     }
     
     /**
@@ -125,7 +128,8 @@ public class Simulator
     {
         for(int tally = 1; tally <= numSteps && view.isViable(field); tally++) {
             simulateOneStep();
-            delay(100);   // uncomment this to run more slowly
+            delay(1);   // uncomment this to run more slowly
+            System.out.println(tally);
         }
     }
     
@@ -178,6 +182,7 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
+
                 if(rand.nextDouble() <= WEREWOLF_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Werewolf werewolf = new Werewolf(true, field, location, "Werewolf");
@@ -236,6 +241,12 @@ public class Simulator
             // wake up
         }
     }
+
+    protected void changeisDay(){
+        isDay = !isDay;
+
+    }
+
 
     public static void main(String[] args) {
         Simulator sim = new Simulator();

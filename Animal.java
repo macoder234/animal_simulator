@@ -1,5 +1,5 @@
 import java.util.List;
-
+import java.util.Random;
 /**
  * A class representing shared characteristics of animals.
  * 
@@ -10,7 +10,7 @@ public abstract class Animal
 {
     // Whether the animal is alive or not.
     private boolean alive;
-    // The animal's field.
+    // The animal's field
     private Field field;
     // The animal's position in the field.
     private Location location;
@@ -24,11 +24,15 @@ public abstract class Animal
     protected int MAX_AGE;
     protected double BREEDING_PROBABILITY;
     protected int MAX_LITTER_SIZE;
+    protected int MAX_HEALTH;
 
     protected int age;
     protected int health;
+    protected Boolean isMale;
     // A shared random number generator to control breeding.
-    private static final Random rand = Randomizer.getRandom();
+    protected static final Random rand = Randomizer.getRandom();
+    //A shared boolean value to represent day or night.
+    protected static boolean isDay;
 
     /**
      * Create a new animal at location in field.
@@ -45,6 +49,9 @@ public abstract class Animal
         alive = true;
         this.field = field;
         setLocation(location);
+        fillAnimalData();
+        assignGender();
+  //      isDay = true;
     }
 
     private void fillAnimalData()
@@ -95,7 +102,6 @@ public abstract class Animal
      * whatever it wants/needs to do.
      * @param newAnimals A list to receive newly born animals.
      */
-    public abstract void act(List<Animal> newAnimals);
 
     /**
      * Check whether the animal is alive or not.
@@ -189,5 +195,40 @@ public abstract class Animal
     protected Field getField() {
         return field;
     }
-    
+
+
+    /**
+     *Check if species has 2 different genders, if so, assign a random gender to each animal
+     */
+    protected void assignGender(){
+        if (data.getOppoGenderRequired(nameOfAnimal))
+        {
+            isMale = rand.nextBoolean();
+        }
+        else {
+            isMale = null;
+        }
+    }
+
+    protected boolean exceedMaxHealth() {
+        // Max health for animal is a multiple of the average of prey food value.
+        MAX_HEALTH = data.getAverageOfPreyValue(nameOfAnimal) * 2;
+        return MAX_HEALTH < health;
+    }
+
+
+    protected void setHealthAndAge(boolean randomAge) {
+        int average = data.getAverageOfPreyValue(nameOfAnimal);
+        if (randomAge) {
+            age = rand.nextInt(MAX_AGE);
+            health = rand.nextInt(100) ;
+        }
+        else {
+            age = 0;
+//           health = average;
+            health = rand.nextInt(100);
+        }
+    }
+
 }
+

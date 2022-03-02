@@ -8,7 +8,7 @@ import java.util.Random;
  * @author David J. Barnes and Michael Kölling
  * @version 2016.02.29 (2)
  */
-public class Unicorn extends Animal
+public class Unicorn extends Herbivore
 {
     // Characteristics shared by all unicorns (class variables).
 
@@ -18,22 +18,22 @@ public class Unicorn extends Animal
     private final int MANDRAKE_FOOD_VALUE = data.getFoodValue("Mandrake");
 
     //
-    private AnimalData data = new AnimalData();
-    // The age at which a unicorn can start to breed.
-    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
-    // The age to which a unicorn can live.
-    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
-    // The likelihood of a unicorn breeding.
-    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
-    // The maximum number of births.
-    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
+//    private AnimalData data = new AnimalData();
+//    // The age at which a unicorn can start to breed.
+//    private final int BREEDING_AGE = data.getBreedingAge(ANIMAL_NAME);
+//    // The age to which a unicorn can live.
+////    private final int MAX_AGE = data.getMaxAge(ANIMAL_NAME);
+//    // The likelihood of a unicorn breeding.
+//    private final double BREEDING_PROBABILITY = data.getBreedingProbability(ANIMAL_NAME);
+//    // The maximum number of births.
+//    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
     // Individual characteristics (instance fields).
 
     // The unicorn's age.
-    private int age;
+//    private int age;
 
     /**
      * Create a new unicorn. A unicorn may be created with age
@@ -47,10 +47,7 @@ public class Unicorn extends Animal
     {
         super(field, location, animalName);
         ANIMAL_NAME = animalName;
-        age = 0;
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
+        setHealthAndAge(randomAge);
     }
 
     /**
@@ -58,22 +55,24 @@ public class Unicorn extends Animal
      * around. Sometimes it will breed or die of old age.
      * @param newUnicorns A list to return newly born unicorns.
      */
-    public void act(List<Animal> newUnicorns)
-    {
-        incrementAge();
-        if(isAlive()) {
-            giveBirth(newUnicorns);
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
-    }
+//    public void act(List<Animal> newUnicorns, boolean isDay)
+//    {
+//
+//        incrementHunger();
+//        incrementAge();
+//        if(isAlive()) {
+//            giveBirth(newUnicorns);
+//            // Try to move into a free location.
+//            Location newLocation = getField().freeAdjacentLocation(getLocation());
+//            if(newLocation != null) {
+//                setLocation(newLocation);
+//            }
+//            else {
+//                // Overcrowding.
+//                setDead();
+//            }
+//        }
+//    }
 
     /**
      * Increase the age.
@@ -90,7 +89,7 @@ public class Unicorn extends Animal
     /**
      * Check whether or not this unicorn is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newUnicorns A list to return newly born unicorns.
+     * @param newAnimals A list to return newly born unicorns.
      */
     protected void giveBirth(List<Animal> newAnimals)
     {
@@ -106,26 +105,27 @@ public class Unicorn extends Animal
         }
     }
 
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
      * @return The number of births (may be zero).
      */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
+//    private int breed()
+//    {
+//        int births = 0;
+//        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+//            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+//        }
+//        return births;
+//    }
 
     /**
      * A unicorn can breed if it has reached the breeding age.
      * @return true if the unicorn can breed, false otherwise.
      */
-    private boolean canBreed()
-    {
-        return age >= BREEDING_AGE;
-    }
+//    private boolean canBreed()
+//    {
+//        return age >= BREEDING_AGE;
+//    }
 }

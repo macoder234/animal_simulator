@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Random;
 
-public class Pegasus extends Animal {
+public class Pegasus extends Herbivore {
 
     private static String ANIMAL_NAME;
     //
@@ -16,10 +16,10 @@ public class Pegasus extends Animal {
 //    private final int MAX_LITTER_SIZE = data.getMaxLitterSize(ANIMAL_NAME);
     // The food value of a single jackalope. In effect, this is the
     // number of steps a werewolf can go before it has to eat again.
-    private final int JACKALOPE_FOOD_VALUE = data.getFoodValue("Jackalope");
-    // The food value of a single pegasus. In effect, this is the
-    // number of steps a werewolf can go before it has to eat again.
-    private final int PEGASUS_FOOD_VALUE = data.getFoodValue("Pegasus");
+        // number of steps a werewolf can go before it has to eat again.
+    private final int HYACINTH_FOOD_VALUE = data.getFoodValue("Hyacinth");
+
+    private final int MANDRAKE_FOOD_VALUE = data.getFoodValue("Mandrake");
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
     // Individual characteristics (instance fields).
@@ -39,10 +39,8 @@ public class Pegasus extends Animal {
     {
         super(field, location, animalName);
         ANIMAL_NAME = animalName;
-        age = 0;
-        if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
-        }
+        setHealthAndAge(randomAge);
+
     }
 
     /**
@@ -82,7 +80,8 @@ public class Pegasus extends Animal {
     /**
      * Check whether or not this pegasus is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newPegasi A list to return newly born pegasi.
+     * @param newAnimals
+     * A list to return newly born pegasi.
      */
     protected void giveBirth(List<Animal> newAnimals)
     {
@@ -103,14 +102,14 @@ public class Pegasus extends Animal {
      * if it can breed.
      * @return The number of births (may be zero).
      */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
+//    private int breed()
+//    {
+//        int births = 0;
+//        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+//            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+//        }
+//        return births;
+//    }
 
     /**
      * A pegasus can breed if it has reached the breeding age.
