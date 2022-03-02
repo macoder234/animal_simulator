@@ -55,10 +55,12 @@ public class SimulatorView extends JFrame
         fieldView = new FieldView(height, width);
 
         Container contents = getContentPane();
-        
+
         JPanel infoPane = new JPanel(new BorderLayout());
             infoPane.add(stepLabel, BorderLayout.WEST);
             infoPane.add(infoLabel, BorderLayout.CENTER);
+
+
         contents.add(infoPane, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
         contents.add(population, BorderLayout.SOUTH);
@@ -104,7 +106,7 @@ public class SimulatorView extends JFrame
      * @param step Which iteration step it is.
      * @param field The field whose status is to be displayed.
      */
-    public void showStatus(int step, Field field)
+    public void showStatus(String weather, int step, Field field, String timeOfDay)
     {
         if(!isVisible()) {
             setVisible(true);
@@ -230,4 +232,6 @@ public class SimulatorView extends JFrame
             }
         }
     }
+
+
 }

@@ -130,8 +130,7 @@ public class Simulator
     {
         for(int tally = 1; tally <= numSteps && view.isViable(field); tally++) {
             simulateOneStep();
-            delay(1);   // uncomment this to run more slowly
-            System.out.println(tally);
+            delay(3000);   // uncomment this to run m
         }
     }
     
@@ -160,7 +159,7 @@ public class Simulator
         // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
 
-        view.showStatus(step, field);
+        view.showStatus(currentWeather, step, field, isDayOrNight());
     }
         
     /**
@@ -256,5 +255,15 @@ public class Simulator
         Simulator sim = new Simulator();
         sim.runLongSimulation();
 
+    }
+
+    private String isDayOrNight()
+    {
+        if (isDay) {
+            return "Day";
+        }
+        else {
+            return "Night";
+        }
     }
 }

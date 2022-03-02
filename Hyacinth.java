@@ -8,6 +8,8 @@ public class Hyacinth extends Plant {
         super(field, location, plantName);
         PLANT_NAME = plantName;
         setAge(randomAge);
+        growthRate = 1.5;
+        currentFoodValue = data.getFoodValue(PLANT_NAME);
     }
 
     @Override

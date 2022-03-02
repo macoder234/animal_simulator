@@ -4,12 +4,15 @@ public class Plant extends Animal {
 
     //if not double, change to int
     protected double growthRate;
-    protected int totalFoodValue;
-    protected int maxTotalFoodValue;
+    //the current food value of the plant due to the growth rate
+    protected double currentFoodValue;
+
+    protected static int maxTotalFoodValue;
 
 
     protected Plant(Field field, Location location, String plantName) {
         super(field, location, plantName);
+        maxTotalFoodValue = 50;
     }
 
     protected void setAge(boolean randomAge) {
@@ -20,10 +23,15 @@ public class Plant extends Animal {
     }
 
 
-    public void act(List<Animal> newPlant, boolean dayOfTime) {
+    public void act(List<Animal> newPlant, boolean dayOfTime, String currentWeather) {
         incrementAge();
         if (isAlive()) {
             giveBirth(newPlant);
+
+            // if it is day, then the current food value is multiplied by the growth rate.
+            if (dayOfTime && currentFoodValue < maxTotalFoodValue / growthRate) {
+                currentFoodValue = currentFoodValue * growthRate;
+            }
 //            // Move towards a source of food if found.
 //            Location newLocation = findFood();
 //            if (newLocation == null) {
@@ -51,9 +59,9 @@ public class Plant extends Animal {
     protected void giveBirth(List<Animal> newPlant) {
     }
 
-//    protected double getGrowthRate(){
-//
-//    }
+    protected double getCurrentFoodValue() {
+        return currentFoodValue;
+    }
 
 
 }

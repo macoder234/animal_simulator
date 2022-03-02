@@ -116,11 +116,13 @@ public class Werewolf extends Animal
                 Object animal = field.getObjectAt(where);
 //            for (Animal prey: data.getAnimalPrey(ANIMAL_NAME)){
                 if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
+                    System.out.println("W ate J");
                     jackalope.setDead();
                     health += JACKALOPE_FOOD_VALUE;
                     return where;
                 }
                 else if (animal instanceof Unicorn unicorn && unicorn.isAlive()) {
+                    System.out.println("W ate U");
                     unicorn.setDead();
                     health += UNICORN_FOOD_VALUE;
                     return where;

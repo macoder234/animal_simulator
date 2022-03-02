@@ -42,9 +42,6 @@ public class AnimalData {
         pegasusPrey.add("Mandrake");
 
 
-
-
-
         fillAnimalData("Jackalope", 7, 100, 0., 5, 4, jackalopePrey, true);
         fillAnimalData("Unicorn", 7, 100, 0.1, 3, 12, unicornPrey, false);
         fillAnimalData("Pegasus", 7, 100, 0.1, 3, 12, pegasusPrey, true);

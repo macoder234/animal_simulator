@@ -126,11 +126,13 @@ public class Griffon extends Animal
                 Object animal = field.getObjectAt(where);
 
                 if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
+                    System.out.println("G ate J");
                     jackalope.setDead();
                     health += JACKALOPE_FOOD_VALUE;
                     return where;
                 }
                 else if (animal instanceof Pegasus pegasus && pegasus.isAlive()) {
+                    System.out.println("G ate P");
                     pegasus.setDead();
                     health += PEGASUS_FOOD_VALUE;
                     return where;

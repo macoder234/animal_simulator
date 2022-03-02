@@ -25,8 +25,8 @@ public class Jackalope extends Herbivore
     // A shared random number generator to control breeding.
 
 
-    private final int HYACINTH_FOOD_VALUE = data.getFoodValue("Hyacinth");
-    private final int MANDRAKE_FOOD_VALUE = data.getFoodValue("Mandrake");
+//    private final int HYACINTH_FOOD_VALUE = data.getFoodValue("Hyacinth");
+//    private final int MANDRAKE_FOOD_VALUE = data.getFoodValue("Mandrake");
 
     // Individual characteristics (instance fields).
     
