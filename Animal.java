@@ -42,6 +42,7 @@ public abstract class Animal
      * Create a new animal at location in field.
      * @param field The field currently occupied.
      * @param location The location within the field.
+     * @param animalName The name of the animal
      */
     protected Animal(Field field, Location location, String animalName)
     {

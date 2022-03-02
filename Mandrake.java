@@ -36,8 +36,9 @@ public class Mandrake extends Plant {
     }
 
     /**
-     *
-     * @param newPlant
+     * Check whether this mandrake is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newPlant A list to return newly born mandrakes.
      */
     @Override
     protected void giveBirth(List<Animal> newPlant) {

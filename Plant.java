@@ -3,7 +3,7 @@ import java.util.List;
 /**
  * Lays out the basic functions for a plant.
  *
- *  @author Saathveekan Satheshkumar, Manik Aggarwale
+ *  @author Saathveekan Satheshkumar, Manik Aggarwal
  *  @version 2022.03.02 (2)
  */
 
@@ -20,13 +20,20 @@ public class Plant extends Animal {
 
     /**
      * Create a new plant at a given location
-     * @param field The field currently occupied
-     *
+     * @param field The field currently occu
+     * @param location The location within the field.
+     * @param animalName The name of the animal
      */
 
     protected Plant(Field field, Location location, String plantName) {
         super(field, location, plantName);
     }
+
+
+
+
+
+
 
     public void act(List<Animal> newPlant, boolean dayOfTime, String currentWeather) {
         incrementAge();
