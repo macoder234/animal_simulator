@@ -48,9 +48,9 @@ public class AnimalData {
         fillAnimalData("Jackalope", 7, 100, 0., 5, 4, jackalopePrey, true);
         fillAnimalData("Unicorn", 7, 100, 0.1, 3, 12, unicornPrey, false);
         fillAnimalData("Pegasus", 7, 100, 0.1, 3, 12, pegasusPrey, true);
-        fillAnimalData("Werewolf", 9, 70, 0.06, 2, 20, werewolfPrey, false);
+        fillAnimalData("Werewolf", 9, 70, 0.03, 2, 20, werewolfPrey, false);
         fillAnimalData("Griffon", 9, 80, 0.06, 2, 20, griffonPrey, false);
-        fillAnimalData("Cyclops", 10, 80, 0.03, 3, 50, cyclopsPrey, false);
+        fillAnimalData("Cyclops", 10, 80, 0.06, 3, 50, cyclopsPrey, false);
         fillAnimalData("Mandrake",0, 60, 0.01, 4, 3, null, false);
         fillAnimalData("Hyacinth", 0, 60, 0.01, 4, 3, null, false);
     }

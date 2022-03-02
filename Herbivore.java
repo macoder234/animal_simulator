@@ -18,13 +18,13 @@ public class Herbivore extends Animal{
                 Object animal = field.getObjectAt(where);
 //            for (Animal prey: data.getAnimalPrey(ANIMAL_NAME)){
                 if (animal instanceof Hyacinth hyacinth && hyacinth.isAlive()) {
+                    health += hyacinth.getCurrentFoodValue();
                     hyacinth.setDead();
-                    health += HYACINTH_FOOD_VALUE;
                     return where;
                 }
                 else if (animal instanceof Mandrake mandrake && mandrake.isAlive()) {
+                    health += mandrake.getCurrentFoodValue();
                     mandrake.setDead();
-                    health += MANDRAKE_FOOD_VALUE;
                     return where;
                 }
             }

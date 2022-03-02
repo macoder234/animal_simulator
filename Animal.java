@@ -69,8 +69,9 @@ public abstract class Animal
      //     * @param field The field currently occupied.
      * @param newAnimals A list to return newly born animals.
      */
-    public void act(List<Animal> newAnimals, boolean dayOfTime){
+    public void act(List<Animal> newAnimals, boolean dayOfTime, String currentWeather){
 
+        if (dayOfTime) {
             incrementAge();
             incrementHunger();
             if (isAlive()) {
@@ -84,13 +85,18 @@ public abstract class Animal
                 // See if it was possible to move.
                 if (newLocation != null) {
                     setLocation(newLocation);
-                }
-                else {
+                } else {
                     // Overcrowding.
                     setDead();
                 }
 //                System.out.println("day");
             }
+        }
+        //70 percent of the animals die.
+        if (currentWeather.equals("Hurricane") && rand.nextDouble() <= 0.7) {
+            System.out.println("Weather: hurricane");
+            setDead();
+        }
     }
 
     protected abstract Location findFood();

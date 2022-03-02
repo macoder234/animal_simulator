@@ -42,10 +42,12 @@ public class Simulator
     // The current state of the field.
     private Field field;
     private boolean isDay;
+    private String currentWeather;
     // The current step of the simulation.
     private int step;
     // A graphical view of the simulation.
     private SimulatorView view;
+    private Weather weather = new Weather();
 
     /**
      * Construct a simulation field with default size.
@@ -116,7 +118,7 @@ public class Simulator
      * (4000 steps).
      */
     public void runLongSimulation(){
-        simulate(5000);
+        simulate(10000);
     }
     
     /**
@@ -142,12 +144,14 @@ public class Simulator
     {
         step++;
         changeisDay();
+        currentWeather = weather.getNewWeather();
+
         // Provide space for newborn animals.
         List<Animal> newAnimals = new ArrayList<>();
         // Let all rabbits act.
         for(Iterator<Animal> it = animals.iterator(); it.hasNext(); ) {
             Animal animal = it.next();
-            animal.act(newAnimals, isDay);
+            animal.act(newAnimals, isDay, currentWeather);
             if(! animal.isAlive()){
                 it.remove();
             }
@@ -170,7 +174,7 @@ public class Simulator
         populate();
         
         // Show the starting state in the view.
-        view.showStatus(step, field);
+        view.showStatus(currentWeather ,step, field, isDayOrNight());
     }
     
     /**

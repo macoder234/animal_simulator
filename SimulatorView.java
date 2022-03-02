@@ -23,6 +23,8 @@ public class SimulatorView extends JFrame
     private static final Color UNKNOWN_COLOR = Color.gray;
 
     private final String STEP_PREFIX = "Step: ";
+    private final String WEATHER_PREFIX = "Weather: ";
+    private final String TIMEOFDAY_PREFIX = "Time Of Day: ";
     private final String POPULATION_PREFIX = "Population: ";
     private JLabel stepLabel, population, infoLabel;
     private FieldView fieldView;
@@ -44,6 +46,7 @@ public class SimulatorView extends JFrame
 
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
+
         infoLabel = new JLabel("  ", JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
         
@@ -106,7 +109,10 @@ public class SimulatorView extends JFrame
         if(!isVisible()) {
             setVisible(true);
         }
-        stepLabel.setText(STEP_PREFIX + step);
+        stepLabel.setText(STEP_PREFIX + step + "       " +
+                TIMEOFDAY_PREFIX + timeOfDay + "       " + WEATHER_PREFIX + weather);
+//        weatherLabel.setText(WEATHER_PREFIX + weather);
+
         stats.reset();
         
         fieldView.preparePaint();

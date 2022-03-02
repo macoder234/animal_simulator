@@ -118,13 +118,11 @@ public class Werewolf extends Animal
                 if (animal instanceof Jackalope jackalope && jackalope.isAlive()) {
                     jackalope.setDead();
                     health += JACKALOPE_FOOD_VALUE;
-                    System.out.println("werewolf ate jackalope");
                     return where;
                 }
                 else if (animal instanceof Unicorn unicorn && unicorn.isAlive()) {
                     unicorn.setDead();
                     health += UNICORN_FOOD_VALUE;
-                    System.out.println("werewolf ate unicorn");
                     return where;
                 }
             }

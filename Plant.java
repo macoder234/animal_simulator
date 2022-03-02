@@ -8,14 +8,13 @@ public class Plant extends Animal {
     protected int maxTotalFoodValue;
 
 
-    protected Plant(Field field, Location location, String plantName){
+    protected Plant(Field field, Location location, String plantName) {
         super(field, location, plantName);
     }
 
-    protected void setAge(boolean randomAge)
-    {
+    protected void setAge(boolean randomAge) {
         age = 0;
-        if(randomAge) {
+        if (randomAge) {
             age = rand.nextInt(MAX_AGE);
         }
     }
@@ -43,7 +42,7 @@ public class Plant extends Animal {
         }
     }
 
-        @Override
+    @Override
     protected Location findFood() {
         return null;
     }
